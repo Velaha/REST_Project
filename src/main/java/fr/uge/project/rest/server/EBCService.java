@@ -1,6 +1,5 @@
 package fr.uge.project.rest.server;
 
-import fr.uge.project.rest.common.Etat;
 import fr.uge.project.rest.common.IBike;
 import fr.uge.project.rest.common.IEBCService;
 
@@ -20,7 +19,7 @@ public class EBCService extends UnicastRemoteObject implements IEBCService {
     }
 
     @Override
-    public void addBike(long id, String note, Etat etat) throws RemoteException {
+    public void addBike(long id, java.lang.String note, String etat) throws RemoteException {
         Bike bike = new Bike(id, note, etat);
         bikes.put(id, bike);
     }

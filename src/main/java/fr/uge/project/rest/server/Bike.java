@@ -1,6 +1,5 @@
 package fr.uge.project.rest.server;
 
-import fr.uge.project.rest.common.Etat;
 import fr.uge.project.rest.common.IBike;
 
 import java.rmi.RemoteException;
@@ -10,12 +9,12 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
     private Long id;
     private String note;
-    private Etat etat_de_restitution;
+    private String etat_de_restitution;
 
     public Bike() throws RemoteException {
     }
 
-    public Bike(Long id, String note, Etat etat_de_restitution) throws RemoteException {
+    public Bike(Long id, String note, String etat_de_restitution) throws RemoteException {
         super();
         this.id = id;
         this.note = note;
@@ -36,10 +35,10 @@ public class Bike extends UnicastRemoteObject implements IBike {
         this.note = note;
     }
 
-    public Etat getEtat_de_restitution() {
+    public String getEtat_de_restitution() {
         return etat_de_restitution;
     }
-    public void setEtat_de_restitution(Etat etat_de_restitution) {
+    public void setEtat_de_restitution(String etat_de_restitution) {
         this.etat_de_restitution = etat_de_restitution;
     }
 
