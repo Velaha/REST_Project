@@ -1,13 +1,13 @@
 package fr.uge.project.rest.client;
 
-import fr.uge.project.rest.common.IEBCService;
+import fr.uge.project.rest.common.Renter;
 
 import java.rmi.Naming;
 
 public class Client {
     public static void main(String[] args) {
         try {
-            IEBCService service = (IEBCService) Naming.lookup("rmi://localhost/EBCService");
+            Renter service = (Renter) Naming.lookup("rmi://localhost/EBCService");
             service.addBike(1L, "Des problèmes pour pédaler", "endommagé");
             service.getAllBike().forEach(System.out::println);
 

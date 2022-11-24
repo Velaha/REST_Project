@@ -1,11 +1,15 @@
 package fr.uge.project.rest.server;
 
-import fr.uge.project.rest.common.IUsers;
+import fr.uge.project.rest.common.IBike;
+import fr.uge.project.rest.common.Rent;
+import fr.uge.project.rest.common.Renter;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class Users implements IUsers {
+public class Users implements Renter, Rent {
 
     private final HashMap<Long, Bike> bikes;
 
@@ -23,5 +27,10 @@ public class Users implements IUsers {
     @Override
     public void removeBike(long id) throws RemoteException {
         bikes.remove(id);
+    }
+
+    @Override
+    public List<IBike> getAllBike() throws RemoteException {
+        return (List) new ArrayList(bikes.values());
     }
 }

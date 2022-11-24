@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public interface IEBCService extends Remote {
+public interface Renter extends Remote {
     void addBike(long id, String note, String etat) throws RemoteException;
     void removeBike(long id) throws RemoteException;
 
