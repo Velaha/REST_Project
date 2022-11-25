@@ -1,7 +1,7 @@
-package fr.uge.project.rest.server;
+package fr.uge.project.rest.server.bikes;
 
 import fr.uge.project.rest.common.IBike;
-import fr.uge.project.rest.common.Renter;
+import fr.uge.project.rest.common.IRenter;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -9,18 +9,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class EBCService extends UnicastRemoteObject implements Renter {
+public class BikeService extends UnicastRemoteObject implements IRenter {
 
     private final HashMap<Long, Bike> bikes;
 
-    public EBCService() throws Exception {
+    public BikeService() throws Exception {
         super();
         bikes = new HashMap<>();
     }
 
     @Override
-    public void addBike(long id, java.lang.String note, String etat) throws RemoteException {
-        Bike bike = new Bike(id, note, etat);
+    public void addBike(long id, String etat) throws RemoteException {
+        Bike bike = new Bike(id, etat);
         bikes.put(id, bike);
     }
 
@@ -31,8 +31,6 @@ public class EBCService extends UnicastRemoteObject implements Renter {
 
     @Override
     public List<IBike> getAllBike() throws RemoteException {
-        return (List) new ArrayList(bikes.values());
+        return new ArrayList<>(bikes.values());
     }
-
-
 }
