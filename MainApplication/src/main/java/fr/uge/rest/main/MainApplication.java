@@ -5,8 +5,10 @@ import java.rmi.RemoteException;
 
 import fr.uge.rest.bike.IBikeService;
 import fr.uge.rest.user.IUserService;
+import org.springframework.boot.SpringApplication;
 
 public class MainApplication {
+	/*
 	public static void main(String[] args) {
 		try {			
 			//BIKE
@@ -42,5 +44,9 @@ public class MainApplication {
 		} catch (Exception e) {
 			System.out.println("Trouble: " + e);
 		}
+	}*/
+
+	public static void main(String[] args) {
+		SpringApplication.run(MainApplication.class, args);
 	}
 }

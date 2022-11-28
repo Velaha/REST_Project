@@ -9,4 +9,5 @@ public interface IBikeService extends Remote {
 	public boolean addBike(long id, IBike bike) throws RemoteException;
 	public void removeBike(long id) throws RemoteException;
 	public List<IBike> getAllBikes() throws RemoteException;
+	public IBike getNewBike() throws RemoteException;
 }
