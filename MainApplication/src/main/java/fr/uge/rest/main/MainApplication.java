@@ -6,8 +6,11 @@ import java.rmi.RemoteException;
 import fr.uge.rest.bike.IBikeService;
 import fr.uge.rest.user.IUserService;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class MainApplication {
+
 	/*
 	public static void main(String[] args) {
 		try {			

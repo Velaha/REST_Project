@@ -7,10 +7,10 @@
 <body>
 <h1 align="center">Eiffel Bike Corp Location Services</h1>
 <h3 align="center">Bienvenue !</h3>
-<form>
+<form th:action="@{/entry}" method="post">
   <div align="center">
-    <button type="submit">Admin</button>
-    <button type="submit">User</button>
+    <button type="submit" name="admin">Admin</button>
+    <button type="submit" name="user">User</button>
   </div>
 </form>
 </body>

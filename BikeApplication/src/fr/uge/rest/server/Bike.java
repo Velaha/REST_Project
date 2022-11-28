@@ -5,7 +5,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bike extends UnicastRemoteObject implements fr.uge.rest.bike.IBike {
+import fr.uge.rest.bike.IBike;
+
+public class Bike extends UnicastRemoteObject implements IBike {
 	private long id;
 	private String etat;
 	private List<Integer> notes;
