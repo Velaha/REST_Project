@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Eiffel Bike Services</title>
+</head>
+<body>
+<h1 align="center">Eiffel Bike Corp Location Services</h1>
+<h3 align="center">Main Menu</h3>
+<h2>Hello <span th:text="${name}"></span> !</h2>
+<div>
+    <p th:if="${bike}">You are renting bike n°<span th:text="${bike.getId()}"></span></p>
+    <p th:unless="${bike}">You are not renting a bike</p>
+</div>
+<div align="center">
+    <form th:action="@{/userMainMenu}" method="post">
+        <button type="submit" name="rentBike">Rent bike</button>
+        <button type="submit" name="returnBike">Return bike</button>
+        <button type="submit" name="offerBike">Offer bike</button>
+        <button type="submit" name="disconnect">Disconnect</button>
+    </form>
+</div>
+</body>
+</html>
