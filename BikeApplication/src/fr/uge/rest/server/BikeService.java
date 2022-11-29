@@ -36,11 +36,11 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 	@Override
 	public long getLastId() throws RemoteException {
 		var value = bikes.keySet().stream().max(Long::compare);
-		return value.isPresent() ? value.get() + 1 : 0;
+		return value.map(aLong -> aLong + 1).orElse(0L);
 	}
 
 	@Override
-	public List<IBike> getAllBikes() throws RemoteException {
+	public ArrayList<IBike> getAllBikes() throws RemoteException {
 		return new ArrayList<>(bikes.values());
 	}
 

@@ -14,6 +14,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	private List<String> comments;
 	private int price;
 	private int timesRented;
+	private boolean isAvailable;
 
 	public Bike() throws RemoteException {
 		super();
@@ -27,6 +28,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
 		this.etat = etat;
 		notes = new ArrayList<>();
 		comments = new ArrayList<>();
+		isAvailable = true;
 	}
 	
 	public Bike(long id, String etat, int price, int timesRented) throws RemoteException {
@@ -37,6 +39,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
 		comments = new ArrayList<>();
 		this.price = price;
 		this.timesRented = timesRented;
+		isAvailable = true;
 	}
 
 	@Override
@@ -118,5 +121,10 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	@Override
 	public void addTimesRented() throws RemoteException {
 		this.timesRented += 1;
+	}
+
+	@Override
+	public void setAvailable(boolean isAvailable) throws RemoteException {
+		this.isAvailable = isAvailable;
 	}
 }
