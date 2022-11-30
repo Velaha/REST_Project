@@ -61,7 +61,7 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 	}
 
 	@Override
-	public boolean exists(long id) throws RemoteException {
+	public boolean doesExists(long id) throws RemoteException {
 		return bikes.containsKey(id);
 	}
 

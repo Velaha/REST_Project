@@ -13,6 +13,6 @@ public interface IBikeService extends Remote {
 	ArrayList<IBike> getAllBikes() throws RemoteException;
 	List<IBike> getSaleableBike() throws RemoteException;
 	IBike getNewBike() throws RemoteException;
-	boolean exists(long id) throws RemoteException;
+	boolean doesExists(long id) throws RemoteException;
 	IBike getBike(long id) throws RemoteException;
 }
