@@ -11,8 +11,8 @@
   <form method="post">
     <div>
       <label>State : </label>
-      <input type="text" name="etat" th:object="${state}">
-      <p th:if="${#fields.hasErrors('state')}" th:errors="*{state}">State Error</p>
+      <input type="text" name="etat" th:object="${etat}">
+      <p th:if="${#fields.hasErrors('etat')}" th:errors="*{etat}">State Error</p>
     </div>
     <button type="submit" name="add">Add</button>
     <button type="submit" name="return">Back</button>

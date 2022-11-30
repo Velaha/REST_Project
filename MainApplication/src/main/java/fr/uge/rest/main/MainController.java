@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -49,21 +50,21 @@ public class MainController {
 	// ADMIN - OFFER BIKE
 	@GetMapping("/admin/addBike")
 	public String getAdminAddBikeForm(Model model) {
-		model.addAttribute("state", "");
+		model.addAttribute("etat", "");
 		return "addBikeForm";
 	}
 
 	@PostMapping(value = "/admin/addBike", params = "add")
-	public String postAdminAddBikeFormAdd(@ModelAttribute("state") String state,
+	public String postAdminAddBikeFormAdd(@ModelAttribute("etat") String etat,
 								  BindingResult bindingResult,
 								  Model model) throws RemoteException {
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() || etat.isBlank()) {
 			model.addAttribute("result", "Bike didn't added");
 			return "addBikeForm";
 		}
 		model.addAttribute("result", "Bike added");
 		var lastId = bikeService.getLastId();
-		bikeService.addBike(lastId, state);
+		bikeService.addBike(lastId, etat);
 		return "addBikeForm";
 	}
 
@@ -116,7 +117,7 @@ public class MainController {
 
 	@PostMapping(value = "/userMainMenu", params = "rentBike")
 	public String postUserMainMenuRent() {
-		return "soon";
+		return "redirect:/userRentBike";
 	}
 
 	@PostMapping(value = "/userMainMenu", params = "returnBike")
@@ -141,12 +142,15 @@ public class MainController {
 	// USER - OFFER BIKE
 	@GetMapping("/user/addBike")
 	public String getUserAddBikeForm(Model model) {
-		model.addAttribute("state", "");
+		if (this.currentUser == null) {
+			return "redirect:/entry";
+		}
+		model.addAttribute("etat", "");
 		return "addBikeForm";
 	}
 
 	@PostMapping(value = "/user/addBike", params = "add")
-	public String postUserAddBikeFormAdd(@ModelAttribute("state") String state,
+	public String postUserAddBikeFormAdd(@ModelAttribute("etat") String etat,
 										  BindingResult bindingResult,
 										  Model model) throws RemoteException {
 		if (bindingResult.hasErrors()) {
@@ -155,7 +159,7 @@ public class MainController {
 		}
 		model.addAttribute("result", "Bike added");
 		var lastId = bikeService.getLastId();
-		bikeService.addBike(lastId, state);
+		bikeService.addBike(lastId, etat);
 		return "addBikeForm";
 	}
 
@@ -167,6 +171,29 @@ public class MainController {
 
 
 	// USER - RENT BIKE
+	@GetMapping("/userRentBike")
+	public String getUserRentBike(Model model) throws RemoteException {
+		if (this.currentUser == null) {
+			return "redirect:/entry";
+		}
+		if (this.bikeService.getAllBikes().isEmpty()) {
+			model.addAttribute("bikes", null);
+		} else {
+			model.addAttribute("bikes", bikeService.getAllBikes());
+		}
+		return "userRentBike";
+	}
+
+	@PostMapping(value = "/userRentBike", params = "choose")
+	public String postUserRentBikeChoose(@RequestParam String id) {
+		if ()
+		return "soon";
+	}
+
+	@PostMapping(value = "/userRentBike", params = "return")
+	public String postUserRentBikeReturn() {
+		return "redirect:/userMainMenu";
+	}
 
 	// USER - RETURN BIKE
 }

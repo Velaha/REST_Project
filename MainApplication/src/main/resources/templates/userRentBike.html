@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Eiffel Bike Services</title>
+</head>
+<body>
+<h1 align="center">Eiffel Bike Corp Location Services</h1>
+<h3 align="center">Rent a bike</h3>
+
+<div th:if="${bikes}">
+    <div th:each="bike : ${bikes}">
+        <p>Bike n°<span th:text="${bike.getId()}"></span></p>
+        <p>State : <span th:text="${bike.getEtat()}"></span></p>
+        <p>Note : <span th:text="${bike.getAvgNote()}"></span></p>
+        <p th:if="${#lists.isEmpty(bike.getComments())}">This bike has no comments</p>
+        <div th:unless="${#lists.isEmpty(bike.getComments())}">
+            <ul th:each="instance : ${bike.getComments()}">
+                <li><span th:text="${instance}"></span></li>
+            </ul>
+        </div>
+
+        <form>
+            <button type="submit" name="choose" th:value="${bike.getId()}">Choose</button>
+        </form>
+    </div>
+</div>
+
+<div th:unless="${bikes}">
+    <p>There is no bikes available</p>
+</div>
+
+
+<div align="center">
+    <form th:action="@{/userRentBike}" method="post">
+        <button type="submit" name="return">Back</button>
+    </form>
+</div>
+</body>
+</html>

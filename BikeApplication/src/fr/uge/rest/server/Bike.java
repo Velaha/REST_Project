@@ -127,4 +127,9 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	public void setAvailable(boolean isAvailable) throws RemoteException {
 		this.isAvailable = isAvailable;
 	}
+
+	@Override
+	public boolean getAvailable() throws RemoteException {
+		return this.isAvailable;
+	}
 }

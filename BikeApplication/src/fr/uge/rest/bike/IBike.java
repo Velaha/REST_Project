@@ -28,6 +28,7 @@ public interface IBike extends Remote {
 	void addTimesRented() throws RemoteException;
 
 	void setAvailable(boolean isAvailable) throws RemoteException;
+	boolean getAvailable() throws RemoteException;
 
-	//public String toString() throws RemoteException;
+	// String toString() throws RemoteException;
 }

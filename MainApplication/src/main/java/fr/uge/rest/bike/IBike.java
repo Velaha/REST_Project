@@ -5,27 +5,30 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public interface IBike extends Remote {
-	public void setId(long id) throws RemoteException;
-	public long getId() throws RemoteException;
-	
-	public void setNotes(int note) throws RemoteException;
-	public List<Integer> getNotes() throws RemoteException;
-	public int getAvgNote() throws RemoteException;
-	public void addNote(int note) throws RemoteException;
-	
-	public void setEtat(String etat) throws RemoteException;
-	public String getEtat() throws RemoteException;
-	
-	public void setComments(String comment) throws RemoteException;
-	public List<String> getComments() throws RemoteException;
-	public void addComment(String comment) throws RemoteException;
-	
-	public void setPrice(int price) throws RemoteException;
-	public int getPrice() throws RemoteException;
-	
-	public void setTimesRented(int timesRented) throws RemoteException;
-	public int getTimesRented() throws RemoteException;
-	public void addTimesRented() throws RemoteException;
+	void setId(long id) throws RemoteException;
+	long getId() throws RemoteException;
 
-	//public String toString() throws RemoteException;
+	void setNotes(int note) throws RemoteException;
+	List<Integer> getNotes() throws RemoteException;
+	int getAvgNote() throws RemoteException;
+	void addNote(int note) throws RemoteException;
+
+	void setEtat(String etat) throws RemoteException;
+	String getEtat() throws RemoteException;
+
+	void setComments(String comment) throws RemoteException;
+	List<String> getComments() throws RemoteException;
+	void addComment(String comment) throws RemoteException;
+
+	void setPrice(int price) throws RemoteException;
+	int getPrice() throws RemoteException;
+
+	void setTimesRented(int timesRented) throws RemoteException;
+	int getTimesRented() throws RemoteException;
+	void addTimesRented() throws RemoteException;
+
+	void setAvailable(boolean isAvailable) throws RemoteException;
+	boolean getAvailable() throws RemoteException;
+
+	// String toString() throws RemoteException;
 }
