@@ -6,7 +6,10 @@ import fr.uge.rest.user.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -18,11 +21,13 @@ public class MainController {
 
 	private IBikeService bikeService;
 	private IUserService userService;
+	//private Shop shop;
 	private IUser currentUser;
 	
 	public MainController() throws MalformedURLException, RemoteException, NotBoundException {
 		this.bikeService = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
 		this.userService = (IUserService) Naming.lookup("rmi://localhost:1098/UserService");
+		//this.shop = new ShopServiceLocator().getShop();
 		this.currentUser = null;
 	}
 
