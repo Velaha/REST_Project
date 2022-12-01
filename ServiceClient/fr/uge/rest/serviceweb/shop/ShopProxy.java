@@ -56,16 +56,16 @@ public class ShopProxy implements fr.uge.rest.serviceweb.shop.Shop {
     return shop.setPriceFromId(id, price);
   }
   
-  public fr.uge.rest.serviceweb.bike.Bike[] getBikes() throws java.rmi.RemoteException{
-    if (shop == null)
-      _initShopProxy();
-    return shop.getBikes();
-  }
-  
   public int[] getNotes(long id) throws java.rmi.RemoteException{
     if (shop == null)
       _initShopProxy();
     return shop.getNotes(id);
+  }
+  
+  public long sellBike(long id) throws java.rmi.RemoteException{
+    if (shop == null)
+      _initShopProxy();
+    return shop.sellBike(id);
   }
   
   public java.lang.String[] getComments(long id) throws java.rmi.RemoteException{
