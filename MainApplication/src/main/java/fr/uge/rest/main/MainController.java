@@ -6,10 +6,7 @@ import fr.uge.rest.user.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -184,10 +181,21 @@ public class MainController {
 		return "userRentBike";
 	}
 
-	@PostMapping(value = "/userRentBike", params = "choose")
-	public String postUserRentBikeChoose(@RequestParam String id) {
-		if ()
-		return "soon";
+	@PostMapping(value = "/userRentBike")
+	public String postUserRentBikeChoose(@RequestParam(value = "choose") int id, Model model) throws RemoteException {
+		var getid = id;
+		var bike = bikeService.getBike(getid);
+		if (!bike.getAvailable()) {
+			model.addAttribute("result", "This bike isn't available yet");
+		} else if (this.currentUser.getBike() != null) {
+			model.addAttribute("result", "You are already renting a bike");
+		} else {
+				this.currentUser.setBike(bike);
+				this.bikeService.getBike(getid).setAvailable(false);
+				this.userService.getUser(this.currentUser.getId()).setBike(bike);
+				model.addAttribute("result", "Bike rented");
+		}
+		return "redirect:/userRentBike";
 	}
 
 	@PostMapping(value = "/userRentBike", params = "return")

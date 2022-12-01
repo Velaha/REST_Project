@@ -20,6 +20,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
 		super();
 		notes = new ArrayList<>();
 		comments = new ArrayList<>();
+		isAvailable = true;
 	}
 	
 	public Bike(long id, String etat) throws RemoteException {

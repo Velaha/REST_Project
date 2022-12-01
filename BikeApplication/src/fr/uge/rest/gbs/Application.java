@@ -11,6 +11,6 @@ import java.rmi.RemoteException;
 public class Application {
     public static void main(String[] args) throws MalformedURLException, NotBoundException, RemoteException {
         var bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
-        GustaveBikeService gbs = new GustaveBikeService();
+        //GustaveBikeService gbs = new GustaveBikeService();
     }
 }

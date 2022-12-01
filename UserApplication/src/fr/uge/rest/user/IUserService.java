@@ -5,9 +5,10 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public interface IUserService extends Remote {
-	public boolean addUser(long id, String name) throws RemoteException;
-	public void removeUser(long id) throws RemoteException;
-	public long getLastId() throws RemoteException;
-	public IUser getUser(long id) throws RemoteException;
-	public List<IUser> getAllUsers() throws RemoteException;
+	boolean addUser(long id, String name) throws RemoteException;
+	void removeUser(long id) throws RemoteException;
+	void replaceUser(long id, IUser user) throws RemoteException;
+	long getLastId() throws RemoteException;
+	IUser getUser(long id) throws RemoteException;
+	List<IUser> getAllUsers() throws RemoteException;
 }
