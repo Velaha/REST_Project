@@ -50,10 +50,10 @@ public class ShopProxy implements fr.uge.rest.serviceweb.shop.Shop {
     return shop.isAvailable(id);
   }
   
-  public void setPriceFromId(long id, int price) throws java.rmi.RemoteException{
+  public boolean setPriceFromId(long id, int price) throws java.rmi.RemoteException{
     if (shop == null)
       _initShopProxy();
-    shop.setPriceFromId(id, price);
+    return shop.setPriceFromId(id, price);
   }
   
   public fr.uge.rest.serviceweb.bike.Bike[] getBikes() throws java.rmi.RemoteException{

@@ -40,7 +40,9 @@ public class ShopSoapBindingStub extends org.apache.axis.client.Stub implements 
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://shop.serviceweb.rest.uge.fr", "price"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
-        oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        oper.setReturnClass(boolean.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://shop.serviceweb.rest.uge.fr", "setPriceFromIdReturn"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[1] = oper;
@@ -232,7 +234,7 @@ public class ShopSoapBindingStub extends org.apache.axis.client.Stub implements 
 }
     }
 
-    public void setPriceFromId(long id, int price) throws java.rmi.RemoteException {
+    public boolean setPriceFromId(long id, int price) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -253,7 +255,14 @@ public class ShopSoapBindingStub extends org.apache.axis.client.Stub implements 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
         }
-        extractAttachments(_call);
+        else {
+            extractAttachments(_call);
+            try {
+                return ((java.lang.Boolean) _resp).booleanValue();
+            } catch (java.lang.Exception _exception) {
+                return ((java.lang.Boolean) org.apache.axis.utils.JavaUtils.convert(_resp, boolean.class)).booleanValue();
+            }
+        }
   } catch (org.apache.axis.AxisFault axisFaultException) {
   throw axisFaultException;
 }
