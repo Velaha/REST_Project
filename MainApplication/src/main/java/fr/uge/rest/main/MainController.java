@@ -124,7 +124,7 @@ public class MainController {
 
 	@PostMapping(value = "/userMainMenu", params = "returnBike")
 	public String postUserMainMenuReturn() {
-		return "soon";
+		return "redirect:/userReturnBike";
 	}
 
 	@PostMapping(value = "/userMainMenu", params = "offerBike")
@@ -209,4 +209,40 @@ public class MainController {
 	}
 
 	// USER - RETURN BIKE
+	@GetMapping("/userReturnBike")
+	public String getUserReturnBike(Model model) throws RemoteException {
+		if (this.currentUser == null) {
+			return "redirect:/entry";
+		}
+		model.addAttribute("bike", this.currentUser.getBike());
+		model.addAttribute("etat", "");
+		model.addAttribute("comment", "");
+		model.addAttribute("note", "");
+		return "userReturnBike";
+	}
+
+	@PostMapping(value = "/userReturnBike", params = "valid")
+	public String postUserReturnBikeValidate(@ModelAttribute("etat") String etat,
+											 @ModelAttribute("comment") String comment,
+											 @ModelAttribute("note") String note,
+											 BindingResult bindingResult,
+											 Model model) throws RemoteException {
+		if (!etat.isBlank()) {
+			this.currentUser.getBike().setEtat(etat);
+		} if (!comment.isBlank()) {
+			this.currentUser.getBike().addComment(comment);
+		} if (!note.isBlank()) {
+			int newNote = Integer.parseInt(note);
+			this.currentUser.getBike().addNote(newNote);
+		}
+		this.bikeService.getBike(this.currentUser.getBike().getId()).setAvailable(true);
+		this.userService.getUser(this.currentUser.getId()).setBike(null);
+		this.currentUser.setBike(null);
+		return "redirect:/userReturnBike";
+	}
+
+	@PostMapping(value = "/userReturnBike", params = "return")
+	public String postUserReturnBikeReturn() {
+		return "redirect:/userMainMenu";
+	}
 }

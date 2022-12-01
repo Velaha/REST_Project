@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Eiffel Bike Services</title>
+</head>
+<body>
+<h1 align="center">Eiffel Bike Corp Location Services</h1>
+<h3 align="center">Return from</h3>
+<div align="center">
+
+  <div>
+    <p th:if="${bike}">You are returning bike n°<span th:text="${bike.getId()}"></span></p>
+    <p th:unless="${bike}">You are not renting a bike</p>
+  </div>
+
+  <form th:action="@{/userReturnBike}" method="post">
+    <div>
+      <label>State : </label>
+      <input type="text" name="etat" th:object="${etat}">
+      <p th:if="${#fields.hasErrors('etat')}" th:errors="*{etat}">State Error</p>
+
+      <label>Comment : </label>
+      <input type="text" name="comment" th:object="${comment}">
+      <p th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">comment Error</p>
+
+      <label>Note : </label>
+      <input type="text" name="note" th:object="${note}">
+      <p th:if="${#fields.hasErrors('note')}" th:errors="*{note}">Note Error</p>
+    </div>
+    <button type="submit" name="valid">Validate</button>
+    <button type="submit" name="return">Back</button>
+
+    <div>
+      <p th:if="${result}"><span th:text="${result}"></span></p>
+    </div>
+
+  </form>
+</div>
+</body>
+</html>

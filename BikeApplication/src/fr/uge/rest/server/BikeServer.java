@@ -6,7 +6,7 @@ import java.rmi.registry.LocateRegistry;
 public class BikeServer {
 	public static void main(String[] args) {
 		try {
-			System.setProperty("java.security.policy/", "sec.policy");
+			//System.setProperty("java.security.policy/", "sec.policy");
 			
 			LocateRegistry.createRegistry(1099);
 			fr.uge.rest.bike.IBikeService bikeService = new BikeService();

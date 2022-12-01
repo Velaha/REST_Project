@@ -22,7 +22,7 @@
         </div>
 
         <form th:action="@{/userRentBike}" method="post">
-            <button type="submit" name="choose" th:value="${bike.getId()}">Choose</button>
+            <button type="submit" data-target="result" name="choose" th:value="${bike.getId()}">Choose</button>
         </form>
     </div>
 </div>
@@ -35,9 +35,9 @@
     <form th:action="@{/userRentBike}" method="post">
         <button type="submit" name="return">Back</button>
     </form>
+    <p th:if="${result}"><span th:text="${result}"></span></p>
 </div>
 
-<p th:if="${result}"><span th:text="${result}"></span></p>
 
 </body>
 </html>
