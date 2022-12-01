@@ -12,6 +12,7 @@
     <div th:each="bike : ${bikes}">
         <p>Bike n°<span th:text="${bike.getId()}"></span></p>
         <p>State : <span th:text="${bike.getEtat()}"></span></p>
+        <p>Status : <span th:if="${bike.getAvailable()}">Available</span><span th:unless="${bike.getAvailable()}">Not available</span></p>
         <p>Note : <span th:text="${bike.getAvgNote()}"></span></p>
         <p th:if="${#lists.isEmpty(bike.getComments())}">This bike has no comments</p>
         <div th:unless="${#lists.isEmpty(bike.getComments())}">
@@ -20,7 +21,7 @@
             </ul>
         </div>
 
-        <form>
+        <form th:action="@{/userRentBike}" method="post">
             <button type="submit" name="choose" th:value="${bike.getId()}">Choose</button>
         </form>
     </div>
@@ -30,11 +31,13 @@
     <p>There is no bikes available</p>
 </div>
 
-
 <div align="center">
     <form th:action="@{/userRentBike}" method="post">
         <button type="submit" name="return">Back</button>
     </form>
 </div>
+
+<p th:if="${result}"><span th:text="${result}"></span></p>
+
 </body>
 </html>

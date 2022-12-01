@@ -28,6 +28,11 @@ public class UserService extends UnicastRemoteObject implements IUserService {
 	}
 
 	@Override
+	public void replaceUser(long id, IUser user) throws RemoteException {
+		users.replace(id, (User) user);
+	}
+
+	@Override
 	public long getLastId() throws RemoteException {
 		var value = users.keySet().stream().max(Long::compare);
 		return value.isPresent() ? value.get() + 1 : 0;
