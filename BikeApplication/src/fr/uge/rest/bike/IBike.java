@@ -20,8 +20,8 @@ public interface IBike extends Remote {
 	List<String> getComments() throws RemoteException;
 	void addComment(String comment) throws RemoteException;
 	
-	void setPrice(int price) throws RemoteException;
-	int getPrice() throws RemoteException;
+	void setPrice(double price) throws RemoteException;
+	double getPrice() throws RemoteException;
 	
 	void setTimesRented(int timesRented) throws RemoteException;
 	int getTimesRented() throws RemoteException;

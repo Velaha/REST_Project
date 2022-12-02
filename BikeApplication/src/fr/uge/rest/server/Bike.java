@@ -12,7 +12,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	private String etat;
 	private List<Integer> notes;
 	private List<String> comments;
-	private int price;
+	private double price;
 	private int timesRented;
 	private boolean isAvailable;
 
@@ -100,12 +100,12 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	}
 
 	@Override
-	public void setPrice(int price) throws RemoteException {
+	public void setPrice(double price) throws RemoteException {
 		this.price = price;
 	}
 
 	@Override
-	public int getPrice() throws RemoteException {
+	public double getPrice() throws RemoteException {
 		return this.price;
 	}
 
