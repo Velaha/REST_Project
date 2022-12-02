@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -23,20 +23,20 @@
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
  <ns1:service name="Shop" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="isAvailable" qname="ns1:isAvailable" returnQName="ns1:isAvailableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+  <ns2:operation name="getComments" qname="ns1:getComments" returnQName="ns1:getCommentsReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
    <ns2:parameter qname="ns1:id" type="xsd:long"/>
   </ns2:operation>
-  <ns1:operation name="getComments" qname="ns2:getComments" returnQName="ns2:getCommentsReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="getNotes" qname="ns2:getNotes" returnQName="ns2:getNotesReturn" returnType="xsd:int" soapAction="" xmlns:ns2="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns2:id" type="xsd:long"/>
   </ns1:operation>
-  <ns1:operation name="setPriceFromId" qname="ns3:setPriceFromId" returnQName="ns3:setPriceFromIdReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="sellBike" qname="ns3:sellBike" returnQName="ns3:sellBikeReturn" returnType="xsd:double" soapAction="" xmlns:ns3="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns3:id" type="xsd:long"/>
-   <ns1:parameter qname="ns3:price" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="getNotes" qname="ns4:getNotes" returnQName="ns4:getNotesReturn" returnType="xsd:int" soapAction="" xmlns:ns4="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="setPriceFromId" qname="ns4:setPriceFromId" returnQName="ns4:setPriceFromIdReturn" returnType="xsd:boolean" soapAction="" xmlns:ns4="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns4:id" type="xsd:long"/>
+   <ns1:parameter qname="ns4:price" type="xsd:double"/>
   </ns1:operation>
-  <ns1:operation name="sellBike" qname="ns5:sellBike" returnQName="ns5:sellBikeReturn" returnType="xsd:long" soapAction="" xmlns:ns5="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="isAvailable" qname="ns5:isAvailable" returnQName="ns5:isAvailableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://shop.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns5:id" type="xsd:long"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="isAvailable getNotes getComments sellBike setPriceFromId"/>

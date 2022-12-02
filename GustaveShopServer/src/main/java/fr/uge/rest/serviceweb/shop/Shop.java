@@ -20,7 +20,7 @@ public class Shop {
 		}
 	}
 	
-	public boolean setPriceFromId(long id, int price) {
+	public boolean setPriceFromId(long id, double price) {
 		if (isAvailable(id)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
@@ -65,7 +65,7 @@ public class Shop {
 		}
 	}
 	
-	public long sellBike(long id) {
+	public double sellBike(long id) {
 		if (isAvailable(id)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");

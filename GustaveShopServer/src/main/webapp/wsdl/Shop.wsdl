@@ -4,20 +4,6 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://shop.serviceweb.rest.uge.fr" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="isAvailable">
-    <complexType>
-     <sequence>
-      <element name="id" type="xsd:long"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="isAvailableResponse">
-    <complexType>
-     <sequence>
-      <element name="isAvailableReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="getComments">
     <complexType>
      <sequence>
@@ -29,21 +15,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element maxOccurs="unbounded" name="getCommentsReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="setPriceFromId">
-    <complexType>
-     <sequence>
-      <element name="id" type="xsd:long"/>
-      <element name="price" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="setPriceFromIdResponse">
-    <complexType>
-     <sequence>
-      <element name="setPriceFromIdReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -71,7 +42,36 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="sellBikeResponse">
     <complexType>
      <sequence>
-      <element name="sellBikeReturn" type="xsd:long"/>
+      <element name="sellBikeReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPriceFromId">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:long"/>
+      <element name="price" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPriceFromIdResponse">
+    <complexType>
+     <sequence>
+      <element name="setPriceFromIdReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isAvailable">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isAvailableResponse">
+    <complexType>
+     <sequence>
+      <element name="isAvailableReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -94,17 +94,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="isAvailableResponse">
+   <wsdl:message name="setPriceFromIdResponse">
 
-      <wsdl:part element="impl:isAvailableResponse" name="parameters">
+      <wsdl:part element="impl:setPriceFromIdResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="setPriceFromIdResponse">
+   <wsdl:message name="isAvailableResponse">
 
-      <wsdl:part element="impl:setPriceFromIdResponse" name="parameters">
+      <wsdl:part element="impl:isAvailableResponse" name="parameters">
 
       </wsdl:part>
 
@@ -134,17 +134,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="isAvailableRequest">
+   <wsdl:message name="sellBikeRequest">
 
-      <wsdl:part element="impl:isAvailable" name="parameters">
+      <wsdl:part element="impl:sellBike" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="sellBikeRequest">
+   <wsdl:message name="isAvailableRequest">
 
-      <wsdl:part element="impl:sellBike" name="parameters">
+      <wsdl:part element="impl:isAvailable" name="parameters">
 
       </wsdl:part>
 
@@ -160,18 +160,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="Shop">
 
-      <wsdl:operation name="isAvailable">
-
-         <wsdl:input message="impl:isAvailableRequest" name="isAvailableRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:isAvailableResponse" name="isAvailableResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="getComments">
 
          <wsdl:input message="impl:getCommentsRequest" name="getCommentsRequest">
@@ -179,18 +167,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:getCommentsResponse" name="getCommentsResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="setPriceFromId">
-
-         <wsdl:input message="impl:setPriceFromIdRequest" name="setPriceFromIdRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:setPriceFromIdResponse" name="setPriceFromIdResponse">
 
        </wsdl:output>
 
@@ -220,29 +196,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="setPriceFromId">
+
+         <wsdl:input message="impl:setPriceFromIdRequest" name="setPriceFromIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setPriceFromIdResponse" name="setPriceFromIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isAvailable">
+
+         <wsdl:input message="impl:isAvailableRequest" name="isAvailableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:isAvailableResponse" name="isAvailableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="ShopSoapBinding" type="impl:Shop">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-
-      <wsdl:operation name="isAvailable">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="isAvailableRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="isAvailableResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="getComments">
 
@@ -255,24 +237,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="getCommentsResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="setPriceFromId">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="setPriceFromIdRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="setPriceFromIdResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -309,6 +273,42 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="sellBikeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setPriceFromId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setPriceFromIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setPriceFromIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isAvailable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isAvailableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isAvailableResponse">
 
             <wsdlsoap:body use="literal"/>
 

@@ -44,22 +44,10 @@ public class ShopProxy implements fr.uge.rest.serviceweb.shop.Shop {
     return shop;
   }
   
-  public boolean isAvailable(long id) throws java.rmi.RemoteException{
-    if (shop == null)
-      _initShopProxy();
-    return shop.isAvailable(id);
-  }
-  
   public java.lang.String[] getComments(long id) throws java.rmi.RemoteException{
     if (shop == null)
       _initShopProxy();
     return shop.getComments(id);
-  }
-  
-  public boolean setPriceFromId(long id, int price) throws java.rmi.RemoteException{
-    if (shop == null)
-      _initShopProxy();
-    return shop.setPriceFromId(id, price);
   }
   
   public int[] getNotes(long id) throws java.rmi.RemoteException{
@@ -68,10 +56,22 @@ public class ShopProxy implements fr.uge.rest.serviceweb.shop.Shop {
     return shop.getNotes(id);
   }
   
-  public long sellBike(long id) throws java.rmi.RemoteException{
+  public double sellBike(long id) throws java.rmi.RemoteException{
     if (shop == null)
       _initShopProxy();
     return shop.sellBike(id);
+  }
+  
+  public boolean setPriceFromId(long id, double price) throws java.rmi.RemoteException{
+    if (shop == null)
+      _initShopProxy();
+    return shop.setPriceFromId(id, price);
+  }
+  
+  public boolean isAvailable(long id) throws java.rmi.RemoteException{
+    if (shop == null)
+      _initShopProxy();
+    return shop.isAvailable(id);
   }
   
   

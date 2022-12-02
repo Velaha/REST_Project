@@ -8,7 +8,7 @@ public class Bike {
     private String etat;
     private Integer[] notes;
     private String[] comments;
-    private int price;
+    private double price;
     private int timesRented;
     private boolean isAvailable;
 
@@ -53,11 +53,11 @@ public class Bike {
     }
 
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getPrice()  {
+    public double getPrice()  {
         return this.price;
     }
 
