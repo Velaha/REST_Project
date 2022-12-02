@@ -16,6 +16,7 @@
         <p>Note : <span th:text="${bike.getAvgNote()}"></span></p>
         <p th:if="${#lists.isEmpty(bike.getComments())}">This bike has no comments</p>
         <div th:unless="${#lists.isEmpty(bike.getComments())}">
+            <p>Comments :</p>
             <ul th:each="instance : ${bike.getComments()}">
                 <li><span th:text="${instance}"></span></li>
             </ul>
@@ -35,7 +36,6 @@
     <form th:action="@{/userRentBike}" method="post">
         <button type="submit" name="return">Back</button>
     </form>
-    <p th:if="${result}"><span th:text="${result}"></span></p>
 </div>
 
 

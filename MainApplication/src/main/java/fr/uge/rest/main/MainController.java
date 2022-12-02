@@ -188,16 +188,12 @@ public class MainController {
 
 	@PostMapping(value = "/userRentBike")
 	public String postUserRentBikeChoose(@RequestParam(value = "choose") int id, Model model) throws RemoteException {
-		var getid = id;
-		var bike = bikeService.getBike(getid);
-		if (!bike.getAvailable()) {
-			model.addAttribute("result", "This bike isn't available yet");
-		} else if (this.currentUser.getBike() != null) {
-			model.addAttribute("result", "You are already renting a bike");
+		var bike = bikeService.getBike(id);
+		if (!bike.getAvailable() || this.currentUser.getBike() != null) {
+			//do nothing
 		} else {
 				this.currentUser.setBike(bike);
-				this.bikeService.getBike(getid).setAvailable(false);
-				this.userService.getUser(this.currentUser.getId()).setBike(bike);
+				bike.setAvailable(false);
 				model.addAttribute("result", "Bike rented");
 		}
 		return "redirect:/userRentBike";
@@ -235,8 +231,7 @@ public class MainController {
 			int newNote = Integer.parseInt(note);
 			this.currentUser.getBike().addNote(newNote);
 		}
-		this.bikeService.getBike(this.currentUser.getBike().getId()).setAvailable(true);
-		this.userService.getUser(this.currentUser.getId()).setBike(null);
+		this.currentUser.getBike().setAvailable(true);
 		this.currentUser.setBike(null);
 		return "redirect:/userReturnBike";
 	}
