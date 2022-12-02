@@ -65,13 +65,17 @@ public class Shop {
 		}
 	}
 	
-	public double sellBike(long id) {
+	public boolean sellBike(long id) {
 		if (isAvailable(id)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
 				IBike soldBike = bike.getBike(id);
-				bike.getSaleableBike().remove(soldBike);
-				return soldBike.getPrice();
+				if (soldBike.getAvailable()) {
+					bike.getSaleableBike().remove(soldBike);
+					 soldBike.getPrice();
+					 return true;
+				} 
+					throw new IllegalArgumentException("Bike is not available");				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -79,4 +83,24 @@ public class Shop {
 			throw new IllegalArgumentException("Id doesn't exist");
 		}
 	}
+	/*
+	public boolean canBuy(long id) {
+		if (isAvailable(id)) {
+			try {
+				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
+				IBike soldBike = bike.getBike(id);
+				if (soldBike.getAvailable()) {
+	
+					 soldBike.getPrice();
+					 return true;
+				} 
+					throw new IllegalArgumentException("Bike is not available");				
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		} else {
+			throw new IllegalArgumentException("Id doesn't exist");
+		}
+	}*/
+	
 }
