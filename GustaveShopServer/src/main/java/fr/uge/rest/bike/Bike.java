@@ -35,7 +35,7 @@ public class Bike {
 
 
     public int getAvgNote(){
-        var avg = Arrays.stream(this.notes).mapToInt(Integer::intValue).sum() / this.notes.length;
+        int avg = Arrays.stream(this.notes).mapToInt(Integer::intValue).sum() / this.notes.length;
         return avg;
     }
 

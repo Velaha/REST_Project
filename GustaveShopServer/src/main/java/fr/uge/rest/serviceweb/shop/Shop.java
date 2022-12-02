@@ -24,7 +24,7 @@ public class Shop {
 		if (isAvailable(id)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
-				var bikeRentedAtleastOnce = bike.getBike(id);
+				IBike bikeRentedAtleastOnce = bike.getBike(id);
 				if (bikeRentedAtleastOnce.getTimesRented() > 0) {
 					bikeRentedAtleastOnce.setPrice(price);
 					return true;
