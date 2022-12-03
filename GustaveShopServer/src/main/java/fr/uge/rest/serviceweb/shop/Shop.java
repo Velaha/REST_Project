@@ -1,17 +1,22 @@
 package fr.uge.rest.serviceweb.shop;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
+
+import javax.xml.rpc.ServiceException;
 
 import fr.uge.rest.bike.Bike;
 import fr.uge.rest.bike.IBike;
 import fr.uge.rest.bike.IBikeService;
+import fr.uge.rest.serviceweb.banque.Banque;
+import fr.uge.rest.serviceweb.banque.BanqueServiceLocator;
 
 public class Shop {
 	public Shop() {
 		
 	}
 	
-	public boolean isAvailable(long id) {
+	public boolean idExist(long id) {
 		try {
 			IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
 			return bike.doesExists(id);
@@ -21,7 +26,7 @@ public class Shop {
 	}
 	
 	public boolean setPriceFromId(long id, double price) {
-		if (isAvailable(id)) {
+		if (idExist(id)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
 				IBike bikeRentedAtleastOnce = bike.getBike(id);
@@ -40,7 +45,7 @@ public class Shop {
 
 	
 	public String[] getComments(long id) {
-		if (isAvailable(id)) {
+		if (idExist(id)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
 				return (String[]) bike.getBike(id).getComments().toArray();
@@ -53,7 +58,7 @@ public class Shop {
 	}
 	
 	public Integer[] getNotes(long id) {
-		if (isAvailable(id)) {
+		if (idExist(id)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
 				return (Integer[]) bike.getBike(id).getNotes().toArray();
@@ -66,7 +71,7 @@ public class Shop {
 	}
 	
 	public boolean sellBike(long id) {
-		if (isAvailable(id)) {
+		if (idExist(id)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
 				IBike soldBike = bike.getBike(id);
@@ -83,16 +88,15 @@ public class Shop {
 			throw new IllegalArgumentException("Id doesn't exist");
 		}
 	}
-	/*
-	public boolean canBuy(long id) {
-		if (isAvailable(id)) {
+	
+	public boolean canSell(long bikeId, long userId) {
+		if (idExist(bikeId)) {
 			try {
 				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
-				IBike soldBike = bike.getBike(id);
+				IBike soldBike = bike.getBike(bikeId);
 				if (soldBike.getAvailable()) {
-	
-					 soldBike.getPrice();
-					 return true;
+					Banque banque = new BanqueServiceLocator().getBanque();
+					return banque.isEnough(userId, soldBike.getPrice());				 
 				} 
 					throw new IllegalArgumentException("Bike is not available");				
 			} catch (Exception e) {
@@ -101,6 +105,5 @@ public class Shop {
 		} else {
 			throw new IllegalArgumentException("Id doesn't exist");
 		}
-	}*/
-	
+	}
 }

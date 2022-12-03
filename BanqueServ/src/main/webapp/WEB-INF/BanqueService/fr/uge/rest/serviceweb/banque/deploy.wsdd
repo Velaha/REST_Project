@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from BanqueService WSDL service -->
+
+  <service name="Banque" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://banque.serviceweb.rest.uge.fr"/>
+      <parameter name="wsdlServiceElement" value="BanqueService"/>
+      <parameter name="schemaQualified" value="http://banque.serviceweb.rest.uge.fr"/>
+      <parameter name="wsdlServicePort" value="Banque"/>
+      <parameter name="className" value="fr.uge.rest.serviceweb.banque.Banque"/>
+      <parameter name="wsdlPortType" value="Banque"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" name="add" qname="operNS:add" soapAction="">
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:funds" type="tns:double"/>
+      </operation>
+      <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" name="remove" qname="operNS:remove" soapAction="">
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" name="boughtBike" qname="operNS:boughtBike" soapAction="">
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:price" type="tns:double"/>
+      </operation>
+      <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" xmlns:retNS="http://banque.serviceweb.rest.uge.fr" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="isEnough" qname="operNS:isEnough" returnQName="retNS:isEnoughReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:price" type="tns:double"/>
+      </operation>
+      <parameter name="allowedMethods" value="add isEnough boughtBike remove"/>
+
+  </service>
+</deployment>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://banque.serviceweb.rest.uge.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://banque.serviceweb.rest.uge.fr" xmlns:intf="http://banque.serviceweb.rest.uge.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://banque.serviceweb.rest.uge.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="add">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:long"/>
+      <element name="funds" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addResponse">
+    <complexType/>
+   </element>
+   <element name="remove">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeResponse">
+    <complexType/>
+   </element>
+   <element name="boughtBike">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:long"/>
+      <element name="price" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="boughtBikeResponse">
+    <complexType/>
+   </element>
+   <element name="isEnough">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:long"/>
+      <element name="price" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isEnoughResponse">
+    <complexType>
+     <sequence>
+      <element name="isEnoughReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="removeResponse">
+
+      <wsdl:part element="impl:removeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeRequest">
+
+      <wsdl:part element="impl:remove" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isEnoughResponse">
+
+      <wsdl:part element="impl:isEnoughResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isEnoughRequest">
+
+      <wsdl:part element="impl:isEnough" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addRequest">
+
+      <wsdl:part element="impl:add" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="boughtBikeRequest">
+
+      <wsdl:part element="impl:boughtBike" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="boughtBikeResponse">
+
+      <wsdl:part element="impl:boughtBikeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addResponse">
+
+      <wsdl:part element="impl:addResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Banque">
+
+      <wsdl:operation name="add">
+
+         <wsdl:input message="impl:addRequest" name="addRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addResponse" name="addResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="remove">
+
+         <wsdl:input message="impl:removeRequest" name="removeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeResponse" name="removeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="boughtBike">
+
+         <wsdl:input message="impl:boughtBikeRequest" name="boughtBikeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:boughtBikeResponse" name="boughtBikeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isEnough">
+
+         <wsdl:input message="impl:isEnoughRequest" name="isEnoughRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:isEnoughResponse" name="isEnoughResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="BanqueSoapBinding" type="impl:Banque">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="add">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="remove">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="boughtBike">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="boughtBikeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="boughtBikeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isEnough">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isEnoughRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isEnoughResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="BanqueService">
+
+      <wsdl:port binding="impl:BanqueSoapBinding" name="Banque">
+
+         <wsdlsoap:address location="http://localhost:8081/BanqueServ/services/Banque"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
