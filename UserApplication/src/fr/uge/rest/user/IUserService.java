@@ -11,4 +11,7 @@ public interface IUserService extends Remote {
 	long getLastId() throws RemoteException;
 	IUser getUser(long id) throws RemoteException;
 	List<IUser> getAllUsers() throws RemoteException;
+	void putInWaitingLine(long id, IUser user) throws RemoteException;
+	IUser takeFirstUserFromWaitingLine(long id) throws RemoteException;
+	boolean isUserWaiting(long id, IUser user) throws RemoteException;
 }
