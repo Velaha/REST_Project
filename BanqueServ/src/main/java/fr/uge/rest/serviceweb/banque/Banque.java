@@ -1,8 +1,13 @@
 package fr.uge.rest.serviceweb.banque;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import javax.xml.rpc.ServiceException;
+
 import fr.uge.rest.serviceweb.account.Account;
+import fr.uge.rest.serviceweb.convertisseur.Convertisseur;
+import fr.uge.rest.serviceweb.convertisseur.ConvertisseurServiceLocator;
 
 public class Banque {
 	
@@ -24,22 +29,50 @@ public class Banque {
 	    throw new IllegalArgumentException("User not found");
 	}
 	
-	public boolean isEnough(long userId, double price) {
+	public boolean isEnough(long userId, double price, String isoMoney) {
 	    for (Account account : accounts) {
 	        if (account.getUserId() == userId) {
-	            return account.getFunds() >= price;
+	        	try {
+					Convertisseur convert = new ConvertisseurServiceLocator().getConvertisseur();
+					price = convert.convertToEuro(isoMoney, price);
+					return account.getFunds() >= price;
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
 	        }
 	    }
 	    throw new IllegalArgumentException("User not found");
 	}
 	
-	public void boughtBike(long userId, double price) {
+	
+	public void boughtBike(long userId, double price, String isoMoney) {
 	    for (Account account : accounts) {
 	        if (account.getUserId() == userId) {
-	            account.setFunds(account.getFunds() - price);
-	            return;
+	        	try {
+	        		Convertisseur convert = new ConvertisseurServiceLocator().getConvertisseur();
+					price = convert.convertToEuro(isoMoney, price);
+					account.setFunds(account.getFunds() - price);
+		            return;
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
 	        }
 	    }
 	    throw new IllegalArgumentException("User not found");
+	}
+	
+	
+	public double checkFundsInAnotherIso(long userId, String isoMoney) {
+		for (Account account : accounts) {
+			if (account.getUserId() == userId) {
+				try {
+					Convertisseur convert = new ConvertisseurServiceLocator().getConvertisseur();
+					return convert.convertEuroTo(isoMoney, account.getFunds());
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		throw new IllegalArgumentException("User not found");
 	}
 }

@@ -8,9 +8,10 @@
 package fr.uge.rest.serviceweb.shop;
 
 public interface Shop extends java.rmi.Remote {
-    public java.lang.String[] getComments(long id) throws java.rmi.RemoteException;
-    public int[] getNotes(long id) throws java.rmi.RemoteException;
-    public double sellBike(long id) throws java.rmi.RemoteException;
+    public boolean idExist(long id) throws java.rmi.RemoteException;
     public boolean setPriceFromId(long id, double price) throws java.rmi.RemoteException;
-    public boolean isAvailable(long id) throws java.rmi.RemoteException;
+    public boolean canSell(long bikeId, long userId, java.lang.String isoMoney) throws java.rmi.RemoteException;
+    public boolean sellBike(long bikeId, long userId, java.lang.String isoMoney) throws java.rmi.RemoteException;
+    public int[] getNotes(long id) throws java.rmi.RemoteException;
+    public java.lang.String[] getComments(long id) throws java.rmi.RemoteException;
 }

@@ -10,6 +10,9 @@ public class Account {
 	
 	public Account(long userId, double funds) {
 		this.userId = userId;
+		if (funds < 0) {
+			throw new IllegalArgumentException("Funds cannot be negative here");
+		}
 		this.funds = funds;
 	}
 	

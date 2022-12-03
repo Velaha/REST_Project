@@ -25,22 +25,12 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="removeResponse">
     <complexType/>
    </element>
-   <element name="boughtBike">
-    <complexType>
-     <sequence>
-      <element name="userId" type="xsd:long"/>
-      <element name="price" type="xsd:double"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="boughtBikeResponse">
-    <complexType/>
-   </element>
    <element name="isEnough">
     <complexType>
      <sequence>
       <element name="userId" type="xsd:long"/>
       <element name="price" type="xsd:double"/>
+      <element name="isoMoney" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
@@ -48,6 +38,33 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="isEnoughReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="boughtBike">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:long"/>
+      <element name="price" type="xsd:double"/>
+      <element name="isoMoney" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="boughtBikeResponse">
+    <complexType/>
+   </element>
+   <element name="checkFundsInAnotherIso">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:long"/>
+      <element name="isoMoney" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkFundsInAnotherIsoResponse">
+    <complexType>
+     <sequence>
+      <element name="checkFundsInAnotherIsoReturn" type="xsd:double"/>
      </sequence>
     </complexType>
    </element>
@@ -102,9 +119,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="checkFundsInAnotherIsoRequest">
+
+      <wsdl:part element="impl:checkFundsInAnotherIso" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="boughtBikeResponse">
 
       <wsdl:part element="impl:boughtBikeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkFundsInAnotherIsoResponse">
+
+      <wsdl:part element="impl:checkFundsInAnotherIsoResponse" name="parameters">
 
       </wsdl:part>
 
@@ -144,6 +177,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="isEnough">
+
+         <wsdl:input message="impl:isEnoughRequest" name="isEnoughRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:isEnoughResponse" name="isEnoughResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="boughtBike">
 
          <wsdl:input message="impl:boughtBikeRequest" name="boughtBikeRequest">
@@ -156,13 +201,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="isEnough">
+      <wsdl:operation name="checkFundsInAnotherIso">
 
-         <wsdl:input message="impl:isEnoughRequest" name="isEnoughRequest">
+         <wsdl:input message="impl:checkFundsInAnotherIsoRequest" name="checkFundsInAnotherIsoRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:isEnoughResponse" name="isEnoughResponse">
+         <wsdl:output message="impl:checkFundsInAnotherIsoResponse" name="checkFundsInAnotherIsoResponse">
 
        </wsdl:output>
 
@@ -210,6 +255,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="isEnough">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isEnoughRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isEnoughResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="boughtBike">
 
          <wsdlsoap:operation soapAction=""/>
@@ -228,17 +291,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="isEnough">
+      <wsdl:operation name="checkFundsInAnotherIso">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="isEnoughRequest">
+         <wsdl:input name="checkFundsInAnotherIsoRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="isEnoughResponse">
+         <wsdl:output name="checkFundsInAnotherIsoResponse">
 
             <wsdlsoap:body use="literal"/>
 

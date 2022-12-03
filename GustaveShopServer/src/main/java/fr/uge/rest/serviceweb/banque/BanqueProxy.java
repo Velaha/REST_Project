@@ -56,16 +56,22 @@ public class BanqueProxy implements fr.uge.rest.serviceweb.banque.Banque {
     banque.remove(userId);
   }
   
-  public void boughtBike(long userId, double price) throws java.rmi.RemoteException{
+  public boolean isEnough(long userId, double price, java.lang.String isoMoney) throws java.rmi.RemoteException{
     if (banque == null)
       _initBanqueProxy();
-    banque.boughtBike(userId, price);
+    return banque.isEnough(userId, price, isoMoney);
   }
   
-  public boolean isEnough(long userId, double price) throws java.rmi.RemoteException{
+  public void boughtBike(long userId, double price, java.lang.String isoMoney) throws java.rmi.RemoteException{
     if (banque == null)
       _initBanqueProxy();
-    return banque.isEnough(userId, price);
+    banque.boughtBike(userId, price, isoMoney);
+  }
+  
+  public double checkFundsInAnotherIso(long userId, java.lang.String isoMoney) throws java.rmi.RemoteException{
+    if (banque == null)
+      _initBanqueProxy();
+    return banque.checkFundsInAnotherIso(userId, isoMoney);
   }
   
   

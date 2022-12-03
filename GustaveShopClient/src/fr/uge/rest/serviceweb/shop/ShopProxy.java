@@ -44,22 +44,10 @@ public class ShopProxy implements fr.uge.rest.serviceweb.shop.Shop {
     return shop;
   }
   
-  public java.lang.String[] getComments(long id) throws java.rmi.RemoteException{
+  public boolean idExist(long id) throws java.rmi.RemoteException{
     if (shop == null)
       _initShopProxy();
-    return shop.getComments(id);
-  }
-  
-  public int[] getNotes(long id) throws java.rmi.RemoteException{
-    if (shop == null)
-      _initShopProxy();
-    return shop.getNotes(id);
-  }
-  
-  public double sellBike(long id) throws java.rmi.RemoteException{
-    if (shop == null)
-      _initShopProxy();
-    return shop.sellBike(id);
+    return shop.idExist(id);
   }
   
   public boolean setPriceFromId(long id, double price) throws java.rmi.RemoteException{
@@ -68,10 +56,28 @@ public class ShopProxy implements fr.uge.rest.serviceweb.shop.Shop {
     return shop.setPriceFromId(id, price);
   }
   
-  public boolean isAvailable(long id) throws java.rmi.RemoteException{
+  public boolean canSell(long bikeId, long userId, java.lang.String isoMoney) throws java.rmi.RemoteException{
     if (shop == null)
       _initShopProxy();
-    return shop.isAvailable(id);
+    return shop.canSell(bikeId, userId, isoMoney);
+  }
+  
+  public boolean sellBike(long bikeId, long userId, java.lang.String isoMoney) throws java.rmi.RemoteException{
+    if (shop == null)
+      _initShopProxy();
+    return shop.sellBike(bikeId, userId, isoMoney);
+  }
+  
+  public int[] getNotes(long id) throws java.rmi.RemoteException{
+    if (shop == null)
+      _initShopProxy();
+    return shop.getNotes(id);
+  }
+  
+  public java.lang.String[] getComments(long id) throws java.rmi.RemoteException{
+    if (shop == null)
+      _initShopProxy();
+    return shop.getComments(id);
   }
   
   

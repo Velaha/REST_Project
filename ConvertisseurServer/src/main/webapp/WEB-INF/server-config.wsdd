@@ -3,12 +3,12 @@
   <ns1:parameter name="sendMultiRefs" value="true"/>
   <ns1:parameter name="disablePrettyXML" value="true"/>
   <ns1:parameter name="adminPassword" value="admin"/>
-  <ns1:parameter name="attachments.Directory" value="D:\Program Files (x86)\Eclipse\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BanqueServ\WEB-INF\attachments"/>
+  <ns1:parameter name="attachments.Directory" value="D:\Program Files (x86)\Eclipse\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ConvertisseurServer\WEB-INF\attachments"/>
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -32,37 +32,23 @@
   <ns1:parameter name="allowedMethods" value="getVersion"/>
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
- <ns1:service name="Banque" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="add" qname="ns1:add" soapAction="" xmlns:ns1="http://banque.serviceweb.rest.uge.fr" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:userId" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns2:parameter qname="ns1:funds" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+ <ns1:service name="Convertisseur" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="convertToEuro" qname="ns1:convertToEuro" returnQName="ns1:convertToEuroReturn" returnType="xsd:double" soapAction="" xmlns:ns1="http://convertisseur.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:isoMoney" type="xsd:string"/>
+   <ns2:parameter qname="ns1:amount" type="xsd:double"/>
   </ns2:operation>
-  <ns1:operation name="remove" qname="ns2:remove" soapAction="" xmlns:ns2="http://banque.serviceweb.rest.uge.fr">
-   <ns1:parameter qname="ns2:userId" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="convertEuroTo" qname="ns2:convertEuroTo" returnQName="ns2:convertEuroToReturn" returnType="xsd:double" soapAction="" xmlns:ns2="http://convertisseur.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:isoToConvert" type="xsd:string"/>
+   <ns1:parameter qname="ns2:amount" type="xsd:double"/>
   </ns1:operation>
-  <ns1:operation name="isEnough" qname="ns3:isEnough" returnQName="ns3:isEnoughReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://banque.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns3:userId" type="xsd:long"/>
-   <ns1:parameter qname="ns3:price" type="xsd:double"/>
-   <ns1:parameter qname="ns3:isoMoney" type="xsd:string"/>
-  </ns1:operation>
-  <ns1:operation name="boughtBike" qname="ns4:boughtBike" soapAction="" xmlns:ns4="http://banque.serviceweb.rest.uge.fr">
-   <ns1:parameter qname="ns4:userId" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns4:price" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns4:isoMoney" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  </ns1:operation>
-  <ns1:operation name="checkFundsInAnotherIso" qname="ns5:checkFundsInAnotherIso" returnQName="ns5:checkFundsInAnotherIsoReturn" returnType="xsd:double" soapAction="" xmlns:ns5="http://banque.serviceweb.rest.uge.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns5:userId" type="xsd:long"/>
-   <ns1:parameter qname="ns5:isoMoney" type="xsd:string"/>
-  </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="add isEnough boughtBike checkFundsInAnotherIso remove"/>
-  <ns1:parameter name="scope" value="application"/>
+  <ns1:parameter name="allowedMethods" value="convertToEuro convertEuroTo"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="wsdlPortType" value="Banque"/>
-  <ns1:parameter name="className" value="fr.uge.rest.serviceweb.banque.Banque"/>
-  <ns1:parameter name="wsdlServicePort" value="Banque"/>
-  <ns1:parameter name="schemaQualified" value="http://banque.serviceweb.rest.uge.fr"/>
-  <ns1:parameter name="wsdlTargetNamespace" value="http://banque.serviceweb.rest.uge.fr"/>
-  <ns1:parameter name="wsdlServiceElement" value="BanqueService"/>
+  <ns1:parameter name="wsdlPortType" value="Convertisseur"/>
+  <ns1:parameter name="className" value="fr.uge.rest.serviceweb.convertisseur.Convertisseur"/>
+  <ns1:parameter name="wsdlServicePort" value="Convertisseur"/>
+  <ns1:parameter name="schemaQualified" value="http://convertisseur.serviceweb.rest.uge.fr"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://convertisseur.serviceweb.rest.uge.fr"/>
+  <ns1:parameter name="wsdlServiceElement" value="ConvertisseurService"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>

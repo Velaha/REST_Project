@@ -17,15 +17,21 @@
       <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" name="remove" qname="operNS:remove" soapAction="">
         <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
       </operation>
-      <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" name="boughtBike" qname="operNS:boughtBike" soapAction="">
-        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
-        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:price" type="tns:double"/>
-      </operation>
       <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" xmlns:retNS="http://banque.serviceweb.rest.uge.fr" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="isEnough" qname="operNS:isEnough" returnQName="retNS:isEnoughReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
         <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:price" type="tns:double"/>
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:isoMoney" type="tns:string"/>
       </operation>
-      <parameter name="allowedMethods" value="add isEnough boughtBike remove"/>
+      <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" name="boughtBike" qname="operNS:boughtBike" soapAction="">
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:price" type="tns:double"/>
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:isoMoney" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://banque.serviceweb.rest.uge.fr" xmlns:retNS="http://banque.serviceweb.rest.uge.fr" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="checkFundsInAnotherIso" qname="operNS:checkFundsInAnotherIso" returnQName="retNS:checkFundsInAnotherIsoReturn" returnType="rtns:double" soapAction="">
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
+        <parameter xmlns:pns="http://banque.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:isoMoney" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="add isEnough boughtBike checkFundsInAnotherIso remove"/>
 
   </service>
 </deployment>

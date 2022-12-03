@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://convertisseur.serviceweb.rest.uge.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://convertisseur.serviceweb.rest.uge.fr" xmlns:intf="http://convertisseur.serviceweb.rest.uge.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://convertisseur.serviceweb.rest.uge.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="convertToEuro">
+    <complexType>
+     <sequence>
+      <element name="isoMoney" type="xsd:string"/>
+      <element name="amount" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="convertToEuroResponse">
+    <complexType>
+     <sequence>
+      <element name="convertToEuroReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="convertEuroTo">
+    <complexType>
+     <sequence>
+      <element name="isoToConvert" type="xsd:string"/>
+      <element name="amount" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="convertEuroToResponse">
+    <complexType>
+     <sequence>
+      <element name="convertEuroToReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="convertEuroToResponse">
+
+      <wsdl:part element="impl:convertEuroToResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="convertToEuroRequest">
+
+      <wsdl:part element="impl:convertToEuro" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="convertEuroToRequest">
+
+      <wsdl:part element="impl:convertEuroTo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="convertToEuroResponse">
+
+      <wsdl:part element="impl:convertToEuroResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Convertisseur">
+
+      <wsdl:operation name="convertToEuro">
+
+         <wsdl:input message="impl:convertToEuroRequest" name="convertToEuroRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:convertToEuroResponse" name="convertToEuroResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="convertEuroTo">
+
+         <wsdl:input message="impl:convertEuroToRequest" name="convertEuroToRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:convertEuroToResponse" name="convertEuroToResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ConvertisseurSoapBinding" type="impl:Convertisseur">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="convertToEuro">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="convertToEuroRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="convertToEuroResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="convertEuroTo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="convertEuroToRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="convertEuroToResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ConvertisseurService">
+
+      <wsdl:port binding="impl:ConvertisseurSoapBinding" name="Convertisseur">
+
+         <wsdlsoap:address location="http://localhost:8081/ConvertisseurServer/services/Convertisseur"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
