@@ -1,6 +1,10 @@
 package fr.uge.rest.serviceweb.shop;
 
 import java.rmi.Naming;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.xml.rpc.ServiceException;
 
 import fr.uge.rest.bike.IBike;
 import fr.uge.rest.bike.IBikeService;
@@ -8,6 +12,9 @@ import fr.uge.rest.serviceweb.banque.Banque;
 import fr.uge.rest.serviceweb.banque.BanqueServiceLocator;
 
 public class Shop {
+	
+	private static HashSet<IBike> hset = new HashSet<IBike>();
+	
 	public Shop() {
 		
 	}
@@ -101,6 +108,40 @@ public class Shop {
 			}
 		} else {
 			throw new IllegalArgumentException("Id doesn't exist");
+		}
+	}
+	
+	public void addBasket(long bikeId) {
+		if(idExist(bikeId)) {
+			try {
+				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
+				IBike soldBike = bike.getBike(bikeId);
+				hset.add(soldBike);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+	
+	public void removeBasket(long bikeId) {
+		if(idExist(bikeId)) {
+			try {
+				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
+				IBike soldBike = bike.getBike(bikeId);
+				hset.remove(soldBike);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+	
+	public void buyBasket(long userId, String isoMoney) {
+		try {
+			for (IBike bike : hset) {
+				sellBike(userId, bike.getId(), isoMoney);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 }
