@@ -5,12 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-    	<groupId>REST_Project</groupId>
-    	<artifactId>REST_Project</artifactId>
-   	 	<version>1.0-SNAPSHOT</version>
+        <groupId>REST_Project</groupId>
+        <artifactId>REST_Project</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <groupId>fr.uge.rest</groupId>
-    <artifactId>GustaveShopClient</artifactId>
+    <artifactId>ConvertisseurServer</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+
 </project>
