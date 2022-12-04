@@ -10,7 +10,6 @@
    	 	<version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>REST_Project</groupId>
     <artifactId>GustaveShopClient</artifactId>
     <version>1.0-SNAPSHOT</version>
 </project>
