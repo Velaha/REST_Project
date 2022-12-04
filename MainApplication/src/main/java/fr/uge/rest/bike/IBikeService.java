@@ -21,5 +21,5 @@ public interface IBikeService extends Remote {
 	void putInWaitingLine(long id, IUser user) throws RemoteException;
 	IUser takeFirstUserFromWaitingLine(long id) throws RemoteException;
 	boolean isUserWaiting(long id, IUser user) throws RemoteException;
-	void notifyAvailableBike(Bike bike) throws RemoteException;
+	void notifyAvailableBike(IBike bike) throws RemoteException;
 }

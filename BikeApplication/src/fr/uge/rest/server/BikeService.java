@@ -96,7 +96,7 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 	}
 
 	@Override
-	public void notifyAvailableBike(Bike bike) throws RemoteException {
+	public void notifyAvailableBike(IBike bike) throws RemoteException {
 		observer.onBikeReturn(this, bike);
 		
 	}
