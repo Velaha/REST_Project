@@ -6,15 +6,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.uge.rest.bike.IBike;
+import fr.uge.rest.user.IUser;
 
 public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike.IBikeService {
 	private final HashMap<Long, Bike> bikes;
+	private final HashMap<Long, ArrayList<IUser>> waitingLine;
+	private final AddBikeToUserObserver observer;
 	
 	public BikeService() throws RemoteException {
 		super();
 		bikes = new HashMap<>();
+		waitingLine = new HashMap<>();
+		observer = new AddBikeToUserObserver();
 	}
 	
 	@Override
@@ -68,5 +74,30 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 	@Override
 	public IBike getBike(long id) throws RemoteException {
 		return bikes.get(id);
+	}
+	
+
+	@Override
+	public void putInWaitingLine(long id, IUser user) throws RemoteException {
+		waitingLine.merge(Long.valueOf(id), 
+				new ArrayList<>(List.of(user)), 
+				(u1, u2) -> new ArrayList<>(Stream.concat(u1.stream(), u2.stream()).toList()));
+
+	}
+	
+	@Override
+	public IUser takeFirstUserFromWaitingLine(long id) throws RemoteException {
+		return waitingLine.get(id).remove(0);
+	}
+
+	@Override
+	public boolean isUserWaiting(long id, IUser user) throws RemoteException {
+		return waitingLine.get(id).contains(user);
+	}
+
+	@Override
+	public void notifyAvailableBike(Bike bike) throws RemoteException {
+		observer.onBikeReturn(this, bike);
+		
 	}
 }
