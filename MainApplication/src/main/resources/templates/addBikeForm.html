@@ -14,6 +14,11 @@
       <input type="text" name="etat" th:object="${etat}">
       <p th:if="${#fields.hasErrors('etat')}" th:errors="*{etat}">State Error</p>
     </div>
+    <div>
+      <label>Price : </label>
+      <input type="number" min="1" step="any"  name="price" th:object="${price}">
+      <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</p>
+    </div>
     <button type="submit" name="add">Add</button>
     <button type="submit" name="return">Back</button>
 

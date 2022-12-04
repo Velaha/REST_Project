@@ -11,7 +11,7 @@ public class User extends UnicastRemoteObject implements IUser {
 	private String name;
 	private IBike bike;
 	private IBike bikeToAdd;
-	private Object lock = new Object();
+	private final Object lock = new Object();
 
 	public User() throws RemoteException {
 		super();

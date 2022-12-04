@@ -1,8 +1,11 @@
 package fr.uge.rest.bike;
 
+import org.apache.catalina.User;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Optional;
 
 public interface IBike extends Remote {
 	void setId(long id) throws RemoteException;
@@ -29,6 +32,9 @@ public interface IBike extends Remote {
 
 	void setAvailable(boolean isAvailable) throws RemoteException;
 	boolean getAvailable() throws RemoteException;
-
+	/*
+	void addToQueue(User user) throws RemoteException;
+	Optional<User> popQueue() throws RemoteException;
+	*/
 	// String toString() throws RemoteException;
 }

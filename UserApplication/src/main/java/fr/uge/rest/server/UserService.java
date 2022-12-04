@@ -11,7 +11,7 @@ import fr.uge.rest.user.IUserService;
 
 public class UserService extends UnicastRemoteObject implements IUserService {
 	private HashMap<Long, User> users;
-	private Object lock = new Object();
+	private final Object lock = new Object();
 
 	public UserService() throws RemoteException {
 		super();

@@ -55,6 +55,7 @@
    <ns1:parameter qname="ns8:isoMoney" type="xsd:string"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="canSell buyBasket addBasket sellBike idExist setPriceFromId addAccount removeBasket"/>
+  <ns1:parameter name="scope" value="application"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="Shop"/>
   <ns1:parameter name="className" value="fr.uge.rest.serviceweb.shop.Shop"/>

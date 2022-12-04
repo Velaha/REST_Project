@@ -18,8 +18,8 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	private double price;
 	private int timesRented;
 	private boolean isAvailable;
-	private Deque<User> reservations;
-	private Object lock = new Object();
+	//private Deque<User> reservations;
+	private final Object lock = new Object();
 
 	public Bike() throws RemoteException {
 		super();
@@ -47,18 +47,22 @@ public class Bike extends UnicastRemoteObject implements IBike {
 		this.timesRented = timesRented;
 		isAvailable = true;
 	}
-
+	/*
+	@Override
 	public void addToQueue(User user) {
 		synchronized (lock) {
 			reservations.add(user);
 		}
 	}
 
+
+	@Override
 	public Optional<User> popQueue() {
 		synchronized (lock) {
 			return Optional.ofNullable(reservations.poll());
 		}
 	}
+	 */
 
 	@Override
 	public void setId(long id) throws RemoteException {
