@@ -1,6 +1,7 @@
 package fr.uge.rest.serviceweb.shop;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -140,6 +141,15 @@ public class Shop {
 			for (IBike bike : hset) {
 				sellBike(userId, bike.getId(), isoMoney);
 			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void addAccount(long userId, double funds) {
+		try {
+			Banque banque = new BanqueServiceLocator().getBanque();
+			banque.add(userId, funds);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

@@ -18,22 +18,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="sellBike">
-    <complexType>
-     <sequence>
-      <element name="bikeId" type="xsd:long"/>
-      <element name="userId" type="xsd:long"/>
-      <element name="isoMoney" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="sellBikeResponse">
-    <complexType>
-     <sequence>
-      <element name="sellBikeReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="idExist">
     <complexType>
      <sequence>
@@ -48,17 +32,34 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="getNotes">
+   <element name="canSell">
     <complexType>
      <sequence>
-      <element name="id" type="xsd:long"/>
+      <element name="bikeId" type="xsd:long"/>
+      <element name="userId" type="xsd:long"/>
+      <element name="isoMoney" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="getNotesResponse">
+   <element name="canSellResponse">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="getNotesReturn" type="xsd:int"/>
+      <element name="canSellReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPriceFromId">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:long"/>
+      <element name="price" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPriceFromIdResponse">
+    <complexType>
+     <sequence>
+      <element name="setPriceFromIdReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -93,7 +94,32 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="buyBasketResponse">
     <complexType/>
    </element>
-   <element name="canSell">
+   <element name="getNotes">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNotesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getNotesReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addAccount">
+    <complexType>
+     <sequence>
+      <element name="userId" type="xsd:long"/>
+      <element name="funds" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addAccountResponse">
+    <complexType/>
+   </element>
+   <element name="sellBike">
     <complexType>
      <sequence>
       <element name="bikeId" type="xsd:long"/>
@@ -102,25 +128,10 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="canSellResponse">
+   <element name="sellBikeResponse">
     <complexType>
      <sequence>
-      <element name="canSellReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="setPriceFromId">
-    <complexType>
-     <sequence>
-      <element name="id" type="xsd:long"/>
-      <element name="price" type="xsd:double"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="setPriceFromIdResponse">
-    <complexType>
-     <sequence>
-      <element name="setPriceFromIdReturn" type="xsd:boolean"/>
+      <element name="sellBikeReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -183,6 +194,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="addAccountResponse">
+
+      <wsdl:part element="impl:addAccountResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="getNotesRequest">
 
       <wsdl:part element="impl:getNotes" name="parameters">
@@ -223,14 +242,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="sellBikeRequest">
-
-      <wsdl:part element="impl:sellBike" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="idExistResponse">
 
       <wsdl:part element="impl:idExistResponse" name="parameters">
@@ -255,6 +266,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="sellBikeRequest">
+
+      <wsdl:part element="impl:sellBike" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="canSellResponse">
 
       <wsdl:part element="impl:canSellResponse" name="parameters">
@@ -266,6 +285,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="setPriceFromIdRequest">
 
       <wsdl:part element="impl:setPriceFromId" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addAccountRequest">
+
+      <wsdl:part element="impl:addAccount" name="parameters">
 
       </wsdl:part>
 
@@ -285,18 +312,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="sellBike">
-
-         <wsdl:input message="impl:sellBikeRequest" name="sellBikeRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:sellBikeResponse" name="sellBikeResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="idExist">
 
          <wsdl:input message="impl:idExistRequest" name="idExistRequest">
@@ -309,13 +324,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getNotes">
+      <wsdl:operation name="canSell">
 
-         <wsdl:input message="impl:getNotesRequest" name="getNotesRequest">
+         <wsdl:input message="impl:canSellRequest" name="canSellRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getNotesResponse" name="getNotesResponse">
+         <wsdl:output message="impl:canSellResponse" name="canSellResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setPriceFromId">
+
+         <wsdl:input message="impl:setPriceFromIdRequest" name="setPriceFromIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setPriceFromIdResponse" name="setPriceFromIdResponse">
 
        </wsdl:output>
 
@@ -357,25 +384,37 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="canSell">
+      <wsdl:operation name="getNotes">
 
-         <wsdl:input message="impl:canSellRequest" name="canSellRequest">
+         <wsdl:input message="impl:getNotesRequest" name="getNotesRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:canSellResponse" name="canSellResponse">
+         <wsdl:output message="impl:getNotesResponse" name="getNotesResponse">
 
        </wsdl:output>
 
       </wsdl:operation>
 
-      <wsdl:operation name="setPriceFromId">
+      <wsdl:operation name="addAccount">
 
-         <wsdl:input message="impl:setPriceFromIdRequest" name="setPriceFromIdRequest">
+         <wsdl:input message="impl:addAccountRequest" name="addAccountRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:setPriceFromIdResponse" name="setPriceFromIdResponse">
+         <wsdl:output message="impl:addAccountResponse" name="addAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sellBike">
+
+         <wsdl:input message="impl:sellBikeRequest" name="sellBikeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:sellBikeResponse" name="sellBikeResponse">
 
        </wsdl:output>
 
@@ -405,24 +444,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="sellBike">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="sellBikeRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="sellBikeResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="idExist">
 
          <wsdlsoap:operation soapAction=""/>
@@ -441,17 +462,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getNotes">
+      <wsdl:operation name="canSell">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getNotesRequest">
+         <wsdl:input name="canSellRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getNotesResponse">
+         <wsdl:output name="canSellResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setPriceFromId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setPriceFromIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setPriceFromIdResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -513,17 +552,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="canSell">
+      <wsdl:operation name="getNotes">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="canSellRequest">
+         <wsdl:input name="getNotesRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="canSellResponse">
+         <wsdl:output name="getNotesResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -531,17 +570,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="setPriceFromId">
+      <wsdl:operation name="addAccount">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="setPriceFromIdRequest">
+         <wsdl:input name="addAccountRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="setPriceFromIdResponse">
+         <wsdl:output name="addAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sellBike">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sellBikeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sellBikeResponse">
 
             <wsdlsoap:body use="literal"/>
 
