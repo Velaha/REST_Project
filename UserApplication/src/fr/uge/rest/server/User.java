@@ -11,20 +11,25 @@ public class User extends UnicastRemoteObject implements IUser {
 	private String name;
 	private IBike bike;
 	private IBike bikeToAdd;
+	private final Object lock = new Object();
 
 	public User() throws RemoteException {
 		super();
 	}
-	
+
 	public User(long id, String name) throws RemoteException {
 		super();
-		this.id = id;
-		this.name = name;
+		synchronized (lock) {
+			this.id = id;
+			this.name = name;
+		}
 	}
 
 	@Override
 	public void setId(long id) throws RemoteException {
-		this.id = id;
+		synchronized (lock) {
+			this.id = id;
+		}
 	}
 
 	@Override
@@ -34,7 +39,9 @@ public class User extends UnicastRemoteObject implements IUser {
 
 	@Override
 	public void setName(String name) throws RemoteException {
-		this.name = name;
+		synchronized (lock) {
+			this.name = name;
+		}
 	}
 
 	@Override
@@ -44,7 +51,9 @@ public class User extends UnicastRemoteObject implements IUser {
 
 	@Override
 	public void setBike(IBike bike) throws RemoteException {
-		this.bike = bike;
+		synchronized (lock) {
+			this.bike = bike;
+		}
 	}
 
 	@Override
@@ -54,7 +63,9 @@ public class User extends UnicastRemoteObject implements IUser {
 
 	@Override
 	public void setBikeToAdd(IBike bike) throws RemoteException {
-		this.bikeToAdd = bike;
+		synchronized (lock) {
+			this.bikeToAdd = bike;
+		}
 	}
 
 	@Override

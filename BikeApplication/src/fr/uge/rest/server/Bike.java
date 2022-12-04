@@ -15,39 +15,48 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	private double price;
 	private int timesRented;
 	private boolean isAvailable;
+	private Object lock = new Object();
 
 	public Bike() throws RemoteException {
 		super();
-		notes = new ArrayList<>();
-		comments = new ArrayList<>();
-		isAvailable = true;
+		synchronized (lock) {
+			notes = new ArrayList<>();
+			comments = new ArrayList<>();
+			isAvailable = true;
+		}
 	}
-	
+
 	public Bike(long id, String etat) throws RemoteException {
 		super();
-		this.id = id;
-		this.etat = etat;
-		notes = new ArrayList<>();
-		comments = new ArrayList<>();
-		isAvailable = true;
+		synchronized (lock) {
+			this.id = id;
+			this.etat = etat;
+			notes = new ArrayList<>();
+			comments = new ArrayList<>();
+			isAvailable = true;
+		}
 	}
-	
+
 	public Bike(long id, String etat, int price, int timesRented) throws RemoteException {
 		super();
-		this.id = id;
-		this.etat = etat;
-		notes = new ArrayList<>();
-		comments = new ArrayList<>();
-		this.price = price;
-		this.timesRented = timesRented;
-		isAvailable = true;
+		synchronized (lock) {
+			this.id = id;
+			this.etat = etat;
+			notes = new ArrayList<>();
+			comments = new ArrayList<>();
+			this.price = price;
+			this.timesRented = timesRented;
+			isAvailable = true;
+		}
 	}
 
 	@Override
 	public void setId(long id) throws RemoteException {
-		this.id = id;
+		synchronized (lock) {
+			this.id = id;
+		}
 	}
-	
+
 	@Override
 	public long getId() throws RemoteException {
 		return this.id;
@@ -55,7 +64,9 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 	@Override
 	public void setNotes(int note) throws RemoteException {
-		this.notes = List.of(note);		
+		synchronized (lock) {
+			this.notes = List.of(note);
+		}
 	}
 
 	@Override
@@ -71,12 +82,16 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 	@Override
 	public void addNote(int note) throws RemoteException {
-		this.notes.add(note);		
+		synchronized (lock) {
+			this.notes.add(note);
+		}
 	}
 
 	@Override
 	public void setEtat(String etat) throws RemoteException {
-		this.etat = etat;		
+		synchronized (lock) {
+			this.etat = etat;
+		}
 	}
 
 	@Override
@@ -86,7 +101,9 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 	@Override
 	public void setComments(String comment) throws RemoteException {
-		this.comments = List.of(comment);		
+		synchronized (lock) {
+			this.comments = List.of(comment);
+		}
 	}
 
 	@Override
@@ -96,12 +113,16 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 	@Override
 	public void addComment(String comment) throws RemoteException {
-		this.comments.add(comment);
+		synchronized (lock) {
+			this.comments.add(comment);
+		}
 	}
 
 	@Override
 	public void setPrice(double price) throws RemoteException {
-		this.price = price;
+		synchronized (lock) {
+			this.price = price;
+		}
 	}
 
 	@Override
@@ -111,7 +132,9 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 	@Override
 	public void setTimesRented(int timesRented) throws RemoteException {
-		this.timesRented = timesRented;
+		synchronized (lock) {
+			this.timesRented = timesRented;
+		}
 	}
 
 	@Override
@@ -121,12 +144,16 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 	@Override
 	public void addTimesRented() throws RemoteException {
-		this.timesRented += 1;
+		synchronized (lock) {
+			this.timesRented += 1;
+		}
 	}
 
 	@Override
 	public void setAvailable(boolean isAvailable) throws RemoteException {
-		this.isAvailable = isAvailable;
+		synchronized (lock) {
+			this.isAvailable = isAvailable;
+		}
 	}
 
 	@Override

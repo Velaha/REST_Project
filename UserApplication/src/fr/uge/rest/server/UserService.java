@@ -11,25 +11,34 @@ import fr.uge.rest.user.IUserService;
 
 public class UserService extends UnicastRemoteObject implements IUserService {
 	private HashMap<Long, User> users;
+	private final Object lock = new Object();
 
 	public UserService() throws RemoteException {
 		super();
-		users = new HashMap<>();
+		synchronized (lock) {
+			users = new HashMap<>();
+		}
 	}
 
 	@Override
 	public boolean addUser(long id, String name) throws RemoteException {
-		return users.put(id, new User(id, name)) != null;
+		synchronized (lock) {
+			return users.put(id, new User(id, name)) != null;
+		}
 	}
 
 	@Override
 	public void removeUser(long id) throws RemoteException {
-		users.remove(id);
+		synchronized (lock) {
+			users.remove(id);
+		}
 	}
 
 	@Override
 	public void replaceUser(long id, IUser user) throws RemoteException {
-		users.replace(id, (User) user);
+		synchronized (lock) {
+			users.replace(id, (User) user);
+		}
 	}
 
 	@Override

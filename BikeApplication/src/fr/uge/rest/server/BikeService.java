@@ -15,34 +15,39 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 	private final HashMap<Long, Bike> bikes;
 	private final HashMap<Long, ArrayList<IUser>> waitingLine;
 	private final AddBikeToUserObserver observer;
-	
+	private final Object lock = new Object();
+
 	public BikeService() throws RemoteException {
 		super();
 		bikes = new HashMap<>();
 		waitingLine = new HashMap<>();
 		observer = new AddBikeToUserObserver();
 	}
-	
+
 	@Override
 	public boolean addBike(long id, fr.uge.rest.bike.IBike bike) throws RemoteException {
-		return bikes.put(id, (Bike) bike) != null;		
+		synchronized (lock) {
+			return bikes.put(id, (Bike) bike) != null;
+		}
 	}
 
 	@Override
 	public boolean addBike(long id, String etat) throws RemoteException {
-		var bike = new Bike(id, etat);
-		return bikes.put(id, bike) != null;		
+		synchronized (lock) {
+			return bikes.put(id, new Bike(id, etat)) != null;
+		}
 	}
 
 	@Override
 	public void removeBike(long id) throws RemoteException {
-		bikes.remove(id);
+		synchronized (lock) {
+			bikes.remove(id);
+		}
 	}
 
 	@Override
 	public long getLastId() throws RemoteException {
-		var value = bikes.keySet().stream().max(Long::compare);
-		return value.map(aLong -> aLong + 1).orElse(0L);
+		return bikes.keySet().stream().max(Long::compare).map(aLong -> aLong + 1).orElse(0L);
 	}
 
 	@Override
@@ -75,19 +80,21 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 	public IBike getBike(long id) throws RemoteException {
 		return bikes.get(id);
 	}
-	
 
 	@Override
 	public void putInWaitingLine(long id, IUser user) throws RemoteException {
-		waitingLine.merge(Long.valueOf(id), 
-				new ArrayList<>(List.of(user)), 
-				(u1, u2) -> new ArrayList<>(Stream.concat(u1.stream(), u2.stream()).toList()));
+		synchronized (lock) {
+			waitingLine.merge(Long.valueOf(id), new ArrayList<>(List.of(user)),
+					(u1, u2) -> new ArrayList<>(Stream.concat(u1.stream(), u2.stream()).toList()));
+		}
 
 	}
-	
+
 	@Override
 	public IUser takeFirstUserFromWaitingLine(long id) throws RemoteException {
-		return waitingLine.get(id).remove(0);
+		synchronized (lock) {
+			return waitingLine.get(id).remove(0);
+		}
 	}
 
 	@Override
@@ -98,6 +105,6 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 	@Override
 	public void notifyAvailableBike(Bike bike) throws RemoteException {
 		observer.onBikeReturn(this, bike);
-		
+
 	}
 }
