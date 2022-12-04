@@ -55,7 +55,7 @@ public class Shop {
 				if (soldBike.getAvailable()) {
 					Banque banque = new BanqueServiceLocator().getBanque();
 					banque.boughtBike(userId, soldBike.getPrice(), isoMoney);
-					bike.getSaleableBike().remove(soldBike);
+					bike.removeBike(soldBike.getId());
 					return true;
 				} 
 					throw new IllegalArgumentException("Bike is not available");				

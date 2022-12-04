@@ -32,9 +32,9 @@ public interface IBike extends Remote {
 
 	void setAvailable(boolean isAvailable) throws RemoteException;
 	boolean getAvailable() throws RemoteException;
-	/*
-	void addToQueue(User user) throws RemoteException;
-	Optional<User> popQueue() throws RemoteException;
-	*/
+
+	void addToQueue(Long user) throws RemoteException;
+	Optional<Long> popQueue() throws RemoteException;
+
 	// String toString() throws RemoteException;
 }

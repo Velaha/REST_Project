@@ -8,9 +8,11 @@
 <h1 align="center">Eiffel Bike Corp Location Services</h1>
 <h3 align="center">Buy a bike</h3>
 
+<p>Current money : <span th:text="${money}"></span></p>
+
 <div th:if="${bikes}">
     <div th:each="bike : ${bikes}">
-        <p>Bike n°<span th:text="${bike.getId()}"></span></p>
+        <p>Bike nÂ°<span th:text="${bike.getId()}"></span></p>
         <p>State : <span th:text="${bike.getEtat()}"></span></p>
         <p>Status : <span th:if="${bike.getAvailable()}">Available</span><span th:unless="${bike.getAvailable()}">Not available</span></p>
         <p>Note : <span th:text="${bike.getAvgNote()}"></span></p>
@@ -23,7 +25,7 @@
             </ul>
         </div>
 
-        <form th:action="@{/userRentBike}" method="post">
+        <form th:action="@{/userBuyBike}" method="post">
             <button type="submit" data-target="result" name="choose" th:value="${bike.getId()}">Choose</button>
         </form>
     </div>

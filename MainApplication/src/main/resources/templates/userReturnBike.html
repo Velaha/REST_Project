@@ -10,7 +10,7 @@
 <div align="center">
 
   <div>
-    <p th:if="${bike}">You are returning bike n°<span th:text="${bike.getId()}"></span></p>
+    <p th:if="${bike}">You are returning bike nÂ°<span th:text="${bike.getId()}"></span></p>
     <p th:unless="${bike}">You are not renting a bike</p>
   </div>
 
@@ -25,7 +25,7 @@
       <p th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">comment Error</p>
 
       <label>Note : </label>
-      <input type="text" name="note" th:object="${note}">
+      <input type="number" min="1" step="any"  name="note" th:object="${note}">
       <p th:if="${#fields.hasErrors('note')}" th:errors="*{note}">Note Error</p>
     </div>
     <button type="submit" name="valid">Validate</button>

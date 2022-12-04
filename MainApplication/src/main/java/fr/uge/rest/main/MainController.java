@@ -92,14 +92,16 @@ public class MainController {
 	@GetMapping("/userForm")
 	public String getUserForm(Model model) {
 		model.addAttribute("name", "");
+		model.addAttribute("funds", "");
 		return "userForm";
 	}
 
 	@PostMapping(value = "/userForm", params = "connect")
 	public String postUserFormConnect(@ModelAttribute("name") String name,
+									  @ModelAttribute("funds") String funds,
 									  BindingResult bindingResult,
 									  Model model) throws RemoteException {
-		if (bindingResult.hasErrors() || name.isBlank()) {
+		if (bindingResult.hasErrors() || name.isBlank() || funds.isBlank()) {
 			model.addAttribute("result", "Unable to login");
 			return "userForm";
 		}
@@ -107,6 +109,8 @@ public class MainController {
 		var lastId = userService.getLastId();
 		userService.addUser(lastId, name);
 		this.currentUser = userService.getUser(lastId);
+		this.shop.addAccount(this.currentUser.getId(), Double.parseDouble(funds));
+
 		return "redirect:/userMainMenu";
 	}
 
@@ -125,6 +129,7 @@ public class MainController {
 		}
 		model.addAttribute("name", this.currentUser.getName());
 		model.addAttribute("bike", this.currentUser.getBike());
+		model.addAttribute("money", banque.checkFundsInAnotherIso( this.currentUser.getId(), "EUR"));
 		return "userMainMenu";
 	}
 
@@ -143,16 +148,16 @@ public class MainController {
 		return "redirect:/user/addBike";
 	}
 
+	@PostMapping(value = "/userMainMenu", params = "buyBike")
+	public String postUserMainMenuBuy() {
+		return "redirect:/userBuyBike";
+	}
+
 	@PostMapping(value = "/userMainMenu", params = "disconnect")
 	public String postUserMainMenuDisconnect() throws RemoteException {
 		userService.removeUser(this.currentUser.getId());
 		this.currentUser = null;
 		return "redirect:/userForm";
-	}
-
-	@PostMapping(value = "/userMainMenu", params = "buyBike")
-	public String postUserMainMenuBuy() {
-		return "redirect:/userBuyBike";
 	}
 
 
@@ -210,7 +215,7 @@ public class MainController {
 
 		if (!bike.getAvailable()) {
 			/*
-			bike.addToQueue((User) this.currentUser);
+			bike.addToQueue(this.currentUser.getId());
 			 */
 			return "redirect:/userMainMenu";
 		} else if (this.currentUser.getBike() != null) {
@@ -263,7 +268,7 @@ public class MainController {
 		/*
 		var queue = bike.popQueue();
 		if (queue.isPresent()) {
-			queue.get();
+			userService.getUser(queue.get()).setBike(bike);
 			bike.setAvailable(false);
 		}
 		 */
@@ -285,8 +290,10 @@ public class MainController {
 			return "redirect:/entry";
 		}
 		model.addAttribute("bikes", bikeService.getSaleableBike());
+		model.addAttribute("money", banque.checkFundsInAnotherIso( this.currentUser.getId(), "EUR"));
 		return "userBuyBike";
 	}
+
 
 	@PostMapping("/userBuyBike")
 	public String postUserBuyBikeChoose(@RequestParam(value = "choose") int id, Model model) throws RemoteException {
@@ -296,12 +303,11 @@ public class MainController {
 			this.shop.sellBike(id, this.currentUser.getId(), "EUR");
 			model.addAttribute("result", "Bike bought");
 		}
-		return "redirect:/userRentBike";
+		return "redirect:/userBuyBike";
 	}
 
 	@PostMapping(value = "/userBuyBike", params = "return")
-	public String postUserBuyBikeReturn(Model model) throws RemoteException {
-		model.addAttribute("bikes", bikeService.getSaleableBike());
+	public String postUserBuyBikeReturn() {
 		return "userMainMenu";
 	}
 }

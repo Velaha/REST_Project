@@ -8,8 +8,9 @@
 <h1 align="center">Eiffel Bike Corp Location Services</h1>
 <h3 align="center">Main Menu</h3>
 <h2>Hello <span th:text="${name}"></span> !</h2>
+<p>Current money : <span th:text="${money}"></span></p>
 <div>
-    <p th:if="${bike}">You are renting bike n°<span th:text="${bike.getId()}"></span></p>
+    <p th:if="${bike}">You are renting bike nÂ°<span th:text="${bike.getId()}"></span></p>
     <p th:unless="${bike}">You are not renting a bike</p>
 </div>
 <div align="center">

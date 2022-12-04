@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 import fr.uge.rest.bike.IBike;
-import org.apache.catalina.User;
 
 public class Bike extends UnicastRemoteObject implements IBike {
 	private long id;
@@ -18,7 +17,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	private double price;
 	private int timesRented;
 	private boolean isAvailable;
-	//private Deque<User> reservations;
+	private Deque<Long> reservations;
 	private final Object lock = new Object();
 
 	public Bike() throws RemoteException {
@@ -47,9 +46,9 @@ public class Bike extends UnicastRemoteObject implements IBike {
 		this.timesRented = timesRented;
 		isAvailable = true;
 	}
-	/*
+
 	@Override
-	public void addToQueue(User user) {
+	public void addToQueue(Long user) {
 		synchronized (lock) {
 			reservations.add(user);
 		}
@@ -57,12 +56,12 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 
 	@Override
-	public Optional<User> popQueue() {
+	public Optional<Long> popQueue() {
 		synchronized (lock) {
 			return Optional.ofNullable(reservations.poll());
 		}
 	}
-	 */
+
 
 	@Override
 	public void setId(long id) throws RemoteException {
