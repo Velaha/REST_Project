@@ -11,6 +11,7 @@ import fr.uge.rest.user.IUserService;
 
 public class UserService extends UnicastRemoteObject implements IUserService {
 	private HashMap<Long, User> users;
+	private Object lock = new Object();
 
 	public UserService() throws RemoteException {
 		super();
@@ -19,32 +20,48 @@ public class UserService extends UnicastRemoteObject implements IUserService {
 
 	@Override
 	public boolean addUser(long id, String name) throws RemoteException {
-		return users.put(id, new User(id, name)) != null;
+		synchronized (lock) {
+			if (users.containsKey(id)) {
+				return false;
+			}
+			users.put(id, new User(id, name));
+			return true;
+		}
 	}
 
 	@Override
 	public void removeUser(long id) throws RemoteException {
-		users.remove(id);
+		synchronized (lock) {
+			users.remove(id);
+		}
 	}
 
 	@Override
 	public void replaceUser(long id, IUser user) throws RemoteException {
-		users.replace(id, (User) user);
+		synchronized (lock) {
+			users.replace(id, (User) user);
+		}
 	}
 
 	@Override
 	public long getLastId() throws RemoteException {
-		var value = users.keySet().stream().max(Long::compare);
-		return value.isPresent() ? value.get() + 1 : 0;
+		synchronized (lock) {
+			var value = users.keySet().stream().max(Long::compare);
+			return value.map(aLong -> aLong + 1).orElse(0L);
+		}
 	}
 
 	@Override
 	public IUser getUser(long id) throws RemoteException {
-		return users.get(id);
+		synchronized (lock) {
+			return users.get(id);
+		}
 	}
 
 	@Override
 	public List<IUser> getAllUsers() throws RemoteException {
-		return new ArrayList<>(users.values());
+		synchronized (lock) {
+			return new ArrayList<>(users.values());
+		}
 	}
 }

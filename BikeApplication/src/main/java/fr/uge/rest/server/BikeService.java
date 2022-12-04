@@ -19,54 +19,80 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 	
 	@Override
 	public boolean addBike(long id, fr.uge.rest.bike.IBike bike) throws RemoteException {
-		return bikes.put(id, (Bike) bike) != null;		
+		synchronized (bikes) {
+			if (bikes.containsKey(id)) {
+				return false;
+			}
+			bikes.put(id, (Bike) bike);
+			return true;
+		}
 	}
 
 	@Override
 	public boolean addBike(long id, String etat) throws RemoteException {
-		var bike = new Bike(id, etat);
-		return bikes.put(id, bike) != null;		
+		synchronized (bikes) {
+			if (bikes.containsKey(id)) {
+				return false;
+			}
+			bikes.put(id, new Bike(id, etat));
+			return true;
+		}
 	}
 
 	@Override
 	public void removeBike(long id) throws RemoteException {
-		bikes.remove(id);
+		synchronized (bikes) {
+			bikes.remove(id);
+		}
 	}
 
 	@Override
 	public long getLastId() throws RemoteException {
-		var value = bikes.keySet().stream().max(Long::compare);
-		return value.map(aLong -> aLong + 1).orElse(0L);
+		synchronized (bikes) {
+			var value = bikes.keySet().stream().max(Long::compare);
+			return value.map(aLong -> aLong + 1).orElse(0L);
+		}
 	}
 
 	@Override
 	public ArrayList<IBike> getAllBikes() throws RemoteException {
-		return new ArrayList<>(bikes.values());
+		synchronized (bikes) {
+			return new ArrayList<>(bikes.values());
+		}
+
 	}
 
 	@Override
 	public List<IBike> getSaleableBike() throws RemoteException {
-		return bikes.values().stream().filter(bike -> {
-			try {
-				return bike.getTimesRented() > 0;
-			} catch (RemoteException e) {
-				throw new RuntimeException(e);
-			}
-		}).collect(Collectors.toList());
+		synchronized (bikes) {
+			return bikes.values().stream().filter(bike -> {
+				try {
+					return bike.getTimesRented() > 0;
+				} catch (RemoteException e) {
+					throw new RuntimeException(e);
+				}
+			}).collect(Collectors.toList());
+		}
 	}
 
 	@Override
 	public IBike getNewBike() throws RemoteException {
-		return new Bike();
+		synchronized (bikes) {
+			return new Bike();
+		}
 	}
 
 	@Override
 	public boolean doesExists(long id) throws RemoteException {
-		return bikes.containsKey(id);
+		synchronized (bikes) {
+			return bikes.containsKey(id);
+		}
 	}
 
 	@Override
 	public IBike getBike(long id) throws RemoteException {
-		return bikes.get(id);
+		synchronized (bikes) {
+			return bikes.get(id);
+		}
 	}
 }

@@ -15,6 +15,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	private double price;
 	private int timesRented;
 	private boolean isAvailable;
+	private Object lock = new Object();
 
 	public Bike() throws RemoteException {
 		super();
@@ -45,22 +46,30 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 	@Override
 	public void setId(long id) throws RemoteException {
-		this.id = id;
+		synchronized (lock) {
+			this.id = id;
+		}
 	}
 	
 	@Override
 	public long getId() throws RemoteException {
-		return this.id;
+		synchronized (lock) {
+			return this.id;
+		}
 	}
 
 	@Override
 	public void setNotes(int note) throws RemoteException {
-		this.notes = List.of(note);		
+		synchronized (lock) {
+			this.notes = List.of(note);
+		}
 	}
 
 	@Override
 	public List<Integer> getNotes() throws RemoteException {
-		return this.notes;
+		synchronized (lock) {
+			return this.notes;
+		}
 	}
 
 	@Override
@@ -71,66 +80,92 @@ public class Bike extends UnicastRemoteObject implements IBike {
 
 	@Override
 	public void addNote(int note) throws RemoteException {
-		this.notes.add(note);		
+		synchronized (lock) {
+			this.notes.add(note);
+		}
 	}
 
 	@Override
 	public void setEtat(String etat) throws RemoteException {
-		this.etat = etat;		
+		synchronized (lock) {
+			this.etat = etat;
+		}
 	}
 
 	@Override
 	public String getEtat() throws RemoteException {
-		return this.etat;
+		synchronized (lock) {
+			return this.etat;
+		}
 	}
 
 	@Override
 	public void setComments(String comment) throws RemoteException {
-		this.comments = List.of(comment);		
+		synchronized (lock) {
+			this.comments = List.of(comment);
+		}
 	}
 
 	@Override
 	public List<String> getComments() throws RemoteException {
-		return this.comments;
+		synchronized (lock) {
+			return this.comments;
+		}
 	}
 
 	@Override
 	public void addComment(String comment) throws RemoteException {
-		this.comments.add(comment);
+		synchronized (lock) {
+			this.comments.add(comment);
+		}
 	}
 
 	@Override
 	public void setPrice(double price) throws RemoteException {
-		this.price = price;
+		synchronized (lock) {
+			this.price = price;
+		}
 	}
 
 	@Override
 	public double getPrice() throws RemoteException {
-		return this.price;
+		synchronized (lock) {
+			return this.price;
+		}
 	}
 
 	@Override
 	public void setTimesRented(int timesRented) throws RemoteException {
-		this.timesRented = timesRented;
+		synchronized (lock) {
+			this.timesRented = timesRented;
+		}
 	}
 
 	@Override
 	public int getTimesRented() throws RemoteException {
-		return this.timesRented;
+		synchronized (lock) {
+			return this.timesRented;
+		}
 	}
 
 	@Override
 	public void addTimesRented() throws RemoteException {
-		this.timesRented += 1;
+		synchronized (lock) {
+			this.timesRented++;
+		}
 	}
 
 	@Override
 	public void setAvailable(boolean isAvailable) throws RemoteException {
-		this.isAvailable = isAvailable;
+		synchronized (lock) {
+			this.isAvailable = isAvailable;
+		}
 	}
 
 	@Override
 	public boolean getAvailable() throws RemoteException {
-		return this.isAvailable;
+		synchronized (lock) {
+			return this.isAvailable;
+		}
 	}
 }

@@ -11,6 +11,7 @@ public class User extends UnicastRemoteObject implements IUser {
 	private String name;
 	private IBike bike;
 	private IBike bikeToAdd;
+	private Object lock = new Object();
 
 	public User() throws RemoteException {
 		super();
@@ -24,41 +25,57 @@ public class User extends UnicastRemoteObject implements IUser {
 
 	@Override
 	public void setId(long id) throws RemoteException {
-		this.id = id;
+		synchronized (lock) {
+			this.id = id;
+		}
 	}
 
 	@Override
 	public long getId() throws RemoteException {
-		return this.id;
+		synchronized (lock) {
+			return this.id;
+		}
 	}
 
 	@Override
 	public void setName(String name) throws RemoteException {
-		this.name = name;
+		synchronized (lock) {
+			this.name = name;
+		}
 	}
 
 	@Override
 	public String getName() throws RemoteException {
-		return this.name;
+		synchronized (lock) {
+			return this.name;
+		}
 	}
 
 	@Override
 	public void setBike(IBike bike) throws RemoteException {
-		this.bike = bike;
+		synchronized (lock) {
+			this.bike = bike;
+		}
 	}
 
 	@Override
 	public IBike getBike() throws RemoteException {
-		return this.bike;
+		synchronized (lock) {
+			return this.bike;
+		}
 	}
 
 	@Override
 	public void setBikeToAdd(IBike bike) throws RemoteException {
-		this.bikeToAdd = bike;
+		synchronized (lock) {
+			this.bikeToAdd = bike;
+		}
 	}
 
 	@Override
 	public IBike getBikeToAdd() throws RemoteException {
-		return this.bikeToAdd;
+		synchronized (lock) {
+			return this.bikeToAdd;
+		}
 	}
 }
