@@ -1,8 +1,11 @@
-/*package fr.uge.rest.webservice.shop;
+package main.java.fr.uge.rest.webservice.shop;
 
-import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
+/*
+public class ShopClient  {
 
-public class ShopClient extends WebServiceGatewaySupport {
+    public Shop shop() {
+        return new ShopServiceLocator().getShop();
+    }
 
 }
 */
