@@ -16,7 +16,7 @@
 
         <dependencies>
             <dependency>
-                <groupId>REST_Project</groupId>
+                <groupId>fr.uge.rest</groupId>
                 <artifactId>GustaveShopClient</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
