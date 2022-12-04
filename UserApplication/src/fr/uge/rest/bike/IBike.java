@@ -29,6 +29,7 @@ public interface IBike extends Remote {
 
 	void setAvailable(boolean isAvailable) throws RemoteException;
 	boolean getAvailable() throws RemoteException;
+	
 
 	// String toString() throws RemoteException;
 }

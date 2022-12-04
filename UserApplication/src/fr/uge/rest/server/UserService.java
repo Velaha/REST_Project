@@ -47,4 +47,5 @@ public class UserService extends UnicastRemoteObject implements IUserService {
 	public List<IUser> getAllUsers() throws RemoteException {
 		return new ArrayList<>(users.values());
 	}
+
 }
