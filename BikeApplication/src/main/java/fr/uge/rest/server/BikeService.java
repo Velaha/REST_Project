@@ -3,11 +3,13 @@ package fr.uge.rest.server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import fr.uge.rest.bike.IBike;
+import org.apache.catalina.User;
 
 public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike.IBikeService {
 	private final HashMap<Long, Bike> bikes;

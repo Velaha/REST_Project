@@ -3,9 +3,12 @@ package fr.uge.rest.server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
+import java.util.Optional;
 
 import fr.uge.rest.bike.IBike;
+import org.apache.catalina.User;
 
 public class Bike extends UnicastRemoteObject implements IBike {
 	private long id;
@@ -15,6 +18,7 @@ public class Bike extends UnicastRemoteObject implements IBike {
 	private double price;
 	private int timesRented;
 	private boolean isAvailable;
+	private Deque<User> reservations;
 	private Object lock = new Object();
 
 	public Bike() throws RemoteException {
@@ -42,6 +46,18 @@ public class Bike extends UnicastRemoteObject implements IBike {
 		this.price = price;
 		this.timesRented = timesRented;
 		isAvailable = true;
+	}
+
+	public void addToQueue(User user) {
+		synchronized (lock) {
+			reservations.add(user);
+		}
+	}
+
+	public Optional<User> popQueue() {
+		synchronized (lock) {
+			return Optional.ofNullable(reservations.poll());
+		}
 	}
 
 	@Override
