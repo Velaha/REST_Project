@@ -48,10 +48,8 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 
 	@Override
 	public long getLastId() throws RemoteException {
-		synchronized (bikes) {
-			var value = bikes.keySet().stream().max(Long::compare);
-			return value.map(aLong -> aLong + 1).orElse(0L);
-		}
+		var value = bikes.keySet().stream().max(Long::compare);
+		return value.map(aLong -> aLong + 1).orElse(0L);
 	}
 
 	@Override
@@ -77,16 +75,12 @@ public class BikeService extends UnicastRemoteObject implements fr.uge.rest.bike
 
 	@Override
 	public IBike getNewBike() throws RemoteException {
-		synchronized (bikes) {
-			return new Bike();
-		}
+		return new Bike();
 	}
 
 	@Override
 	public boolean doesExists(long id) throws RemoteException {
-		synchronized (bikes) {
-			return bikes.containsKey(id);
-		}
+		return bikes.containsKey(id);
 	}
 
 	@Override

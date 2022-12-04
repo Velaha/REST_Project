@@ -10,9 +10,6 @@
       <parameter name="className" value="fr.uge.rest.serviceweb.shop.Shop"/>
       <parameter name="wsdlPortType" value="Shop"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://shop.serviceweb.rest.uge.fr" xmlns:retNS="http://shop.serviceweb.rest.uge.fr" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getComments" qname="operNS:getComments" returnQName="retNS:getCommentsReturn" returnType="rtns:string" soapAction="">
-        <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:long"/>
-      </operation>
       <operation xmlns:operNS="http://shop.serviceweb.rest.uge.fr" xmlns:retNS="http://shop.serviceweb.rest.uge.fr" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="idExist" qname="operNS:idExist" returnQName="retNS:idExistReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:long"/>
       </operation>
@@ -35,9 +32,6 @@
         <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
         <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:isoMoney" type="tns:string"/>
       </operation>
-      <operation xmlns:operNS="http://shop.serviceweb.rest.uge.fr" xmlns:retNS="http://shop.serviceweb.rest.uge.fr" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getNotes" qname="operNS:getNotes" returnQName="retNS:getNotesReturn" returnType="rtns:int" soapAction="">
-        <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:long"/>
-      </operation>
       <operation xmlns:operNS="http://shop.serviceweb.rest.uge.fr" name="addAccount" qname="operNS:addAccount" soapAction="">
         <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
         <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:funds" type="tns:double"/>
@@ -47,7 +41,7 @@
         <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:long"/>
         <parameter xmlns:pns="http://shop.serviceweb.rest.uge.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:isoMoney" type="tns:string"/>
       </operation>
-      <parameter name="allowedMethods" value="getNotes canSell buyBasket getComments addBasket sellBike idExist setPriceFromId addAccount removeBasket"/>
+      <parameter name="allowedMethods" value="canSell buyBasket addBasket sellBike idExist setPriceFromId addAccount removeBasket"/>
 
   </service>
 </deployment>

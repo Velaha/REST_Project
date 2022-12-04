@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.uge.rest.user.IUser;
+
 public interface IBikeService extends Remote {
 	boolean addBike(long id, String etat) throws RemoteException;
 	boolean addBike(long id, IBike bike) throws RemoteException;

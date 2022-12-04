@@ -46,33 +46,6 @@ public class Shop {
 			throw new IllegalArgumentException("Id doesn't exist");
 		}
 	}
-
-	
-	public String[] getComments(long id) {
-		if (idExist(id)) {
-			try {
-				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
-				return (String[]) bike.getBike(id).getComments().toArray();
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		} else {
-			throw new IllegalArgumentException("Id doesn't exist");
-		}
-	}
-	
-	public Integer[] getNotes(long id) {
-		if (idExist(id)) {
-			try {
-				IBikeService bike = (IBikeService) Naming.lookup("rmi://localhost:1099/BikeService");
-				return (Integer[]) bike.getBike(id).getNotes().toArray();
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		} else {
-			throw new IllegalArgumentException("Id doesn't exist");
-		}
-	}
 	
 	public boolean sellBike(long bikeId, long userId, String isoMoney) {
 		if (idExist(bikeId)) {

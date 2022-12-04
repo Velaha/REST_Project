@@ -4,20 +4,6 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://shop.serviceweb.rest.uge.fr" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="getComments">
-    <complexType>
-     <sequence>
-      <element name="id" type="xsd:long"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getCommentsResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="getCommentsReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="idExist">
     <complexType>
      <sequence>
@@ -94,20 +80,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="buyBasketResponse">
     <complexType/>
    </element>
-   <element name="getNotes">
-    <complexType>
-     <sequence>
-      <element name="id" type="xsd:long"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getNotesResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="getNotesReturn" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="addAccount">
     <complexType>
      <sequence>
@@ -137,14 +109,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    </element>
   </schema>
  </wsdl:types>
-
-   <wsdl:message name="getNotesResponse">
-
-      <wsdl:part element="impl:getNotesResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
 
    <wsdl:message name="setPriceFromIdResponse">
 
@@ -202,33 +166,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getNotesRequest">
-
-      <wsdl:part element="impl:getNotes" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getCommentsResponse">
-
-      <wsdl:part element="impl:getCommentsResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="buyBasketResponse">
 
       <wsdl:part element="impl:buyBasketResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getCommentsRequest">
-
-      <wsdl:part element="impl:getComments" name="parameters">
 
       </wsdl:part>
 
@@ -299,18 +239,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    </wsdl:message>
 
    <wsdl:portType name="Shop">
-
-      <wsdl:operation name="getComments">
-
-         <wsdl:input message="impl:getCommentsRequest" name="getCommentsRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getCommentsResponse" name="getCommentsResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="idExist">
 
@@ -384,18 +312,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getNotes">
-
-         <wsdl:input message="impl:getNotesRequest" name="getNotesRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getNotesResponse" name="getNotesResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="addAccount">
 
          <wsdl:input message="impl:addAccountRequest" name="addAccountRequest">
@@ -425,24 +341,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:binding name="ShopSoapBinding" type="impl:Shop">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-
-      <wsdl:operation name="getComments">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getCommentsRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getCommentsResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="idExist">
 
@@ -545,24 +443,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="buyBasketResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getNotes">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getNotesRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getNotesResponse">
 
             <wsdlsoap:body use="literal"/>
 

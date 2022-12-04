@@ -45,23 +45,17 @@ public class UserService extends UnicastRemoteObject implements IUserService {
 
 	@Override
 	public long getLastId() throws RemoteException {
-		synchronized (lock) {
-			var value = users.keySet().stream().max(Long::compare);
-			return value.map(aLong -> aLong + 1).orElse(0L);
-		}
+		var value = users.keySet().stream().max(Long::compare);
+		return value.map(aLong -> aLong + 1).orElse(0L);
 	}
 
 	@Override
 	public IUser getUser(long id) throws RemoteException {
-		synchronized (lock) {
-			return users.get(id);
-		}
+		return users.get(id);
 	}
 
 	@Override
 	public List<IUser> getAllUsers() throws RemoteException {
-		synchronized (lock) {
-			return new ArrayList<>(users.values());
-		}
+		return new ArrayList<>(users.values());
 	}
 }
